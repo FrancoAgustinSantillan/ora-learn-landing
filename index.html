@@ -3,28 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORA — Auditoría Lingüística con IA</title>
+<title>ORA — El futuro del aprendizaje</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0a0f;
-    --paper: #f5f3ee;
-    --accent: #2d5bff;
-    --accent2: #ff4d2e;
-    --muted: #6b6b78;
-    --border: #e0ddd6;
+    --sage: #4a7c59;
+    --sage-light: #7ab893;
+    --sage-pale: #c8e6d4;
+    --teal: #2a9d8f;
+    --sky: #48cae4;
+    --sky-pale: #caf0f8;
+    --cream: #f7f9f4;
+    --dark: #1a2e1e;
+    --muted: #6b8f71;
+    --white: #ffffff;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
     overflow-x: hidden;
+  }
+
+  /* ── CANVAS DE FONDO ── */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.35;
   }
 
   /* ── NAV ── */
@@ -32,639 +45,508 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 48px;
-    border-bottom: 1px solid var(--border);
-    background: var(--paper);
-    backdrop-filter: blur(12px);
+    background: rgba(247,249,244,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(74,124,89,0.12);
   }
 
   .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.4rem;
-    letter-spacing: -0.02em; color: var(--ink);
-    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 1.6rem;
+    color: var(--sage); text-decoration: none;
+    letter-spacing: 0.05em;
   }
-
-  .nav-logo span { color: var(--accent); }
 
   .nav-cta {
-    background: var(--ink); color: var(--paper);
-    font-family: 'Inter', sans-serif;
+    background: var(--sage);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem; font-weight: 500;
-    padding: 10px 22px; border-radius: 6px;
-    text-decoration: none; border: none; cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
+    padding: 10px 24px; border-radius: 99px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    border: none; cursor: pointer;
   }
-  .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+  .nav-cta:hover { background: var(--teal); transform: translateY(-1px); }
 
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
     padding: 120px 48px 80px;
-    position: relative; overflow: hidden;
+    position: relative; z-index: 1;
   }
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 6px 14px; border-radius: 99px;
-    margin-bottom: 36px; width: fit-content;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent2); display: block;
-    animation: pulse 2s ease infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+  .hero-eyebrow {
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 28px;
+    opacity: 0; animation: riseUp 0.8s 0.2s ease forwards;
   }
 
   h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 7vw, 6.5rem);
-    font-weight: 800; line-height: 0.95;
-    letter-spacing: -0.03em;
-    max-width: 900px;
-    animation: fadeUp 0.6s 0.1s ease both;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700; line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+    opacity: 0; animation: riseUp 0.9s 0.35s ease forwards;
   }
 
-  h1 em {
-    font-style: normal;
-    color: var(--accent);
-    position: relative;
-  }
-
-  h1 em::after {
-    content: '';
-    position: absolute; bottom: 4px; left: 0; right: 0;
-    height: 4px; background: var(--accent2);
-    border-radius: 2px;
-    transform: scaleX(0); transform-origin: left;
-    animation: underlineIn 0.5s 0.7s ease forwards;
-  }
-
-  @keyframes underlineIn { to { transform: scaleX(1); } }
+  h1 .italic { font-style: italic; color: var(--sage); }
 
   .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
     font-weight: 300; color: var(--muted);
-    max-width: 560px; line-height: 1.7;
-    margin-top: 28px;
-    animation: fadeUp 0.6s 0.2s ease both;
+    max-width: 520px; line-height: 1.75;
+    margin: 28px auto 0;
+    opacity: 0; animation: riseUp 0.9s 0.5s ease forwards;
   }
 
   .hero-actions {
     display: flex; gap: 16px; align-items: center;
-    margin-top: 44px; flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.3s ease both;
+    margin-top: 48px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: riseUp 0.9s 0.65s ease forwards;
   }
 
   .btn-primary {
-    background: var(--accent); color: white;
-    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--sage), var(--teal));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.95rem; font-weight: 500;
-    padding: 14px 32px; border-radius: 8px;
+    padding: 14px 36px; border-radius: 99px;
     text-decoration: none; border: none; cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 20px rgba(45, 91, 255, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 24px rgba(74,124,89,0.3);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,91,255,0.4); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(74,124,89,0.4); }
 
   .btn-ghost {
-    color: var(--ink); font-family: 'Inter', sans-serif;
+    color: var(--sage);
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.95rem; font-weight: 400;
     text-decoration: none;
     display: flex; align-items: center; gap: 8px;
-    transition: gap 0.2s;
+    transition: gap 0.2s, color 0.2s;
+    border: 1.5px solid var(--sage-pale);
+    padding: 13px 28px; border-radius: 99px;
   }
-  .btn-ghost:hover { gap: 14px; }
-  .btn-ghost::after { content: '→'; }
+  .btn-ghost:hover { gap: 14px; border-color: var(--sage); }
 
-  /* Decorative grid */
-  .hero-grid {
-    position: absolute; right: -100px; top: 50%;
-    transform: translateY(-50%);
-    width: 500px; height: 500px;
-    opacity: 0.06;
-    display: grid; grid-template-columns: repeat(8, 1fr);
-    gap: 2px; pointer-events: none;
-    animation: fadeIn 1s 0.5s ease both;
+  /* ── ORBS decorativos ── */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    opacity: 0; animation: fadeIn 1.5s 1s ease forwards;
+  }
+  .orb-1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(122,184,147,0.4), transparent);
+    top: 10%; left: -100px;
+  }
+  .orb-2 {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(72,202,228,0.3), transparent);
+    bottom: 10%; right: -80px;
+  }
+  .orb-3 {
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(42,157,143,0.2), transparent);
+    top: 40%; left: 40%;
   }
 
-  .hero-grid-cell {
-    background: var(--ink);
-    border-radius: 2px;
-    animation: cellPulse 4s ease infinite;
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em;
+    opacity: 0; animation: fadeIn 1s 1.5s ease forwards;
   }
 
-  .hero-grid-cell:nth-child(odd) { animation-delay: 0.5s; }
-  .hero-grid-cell:nth-child(3n) { animation-delay: 1s; }
-
-  @keyframes cellPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--sage-pale), transparent);
+    animation: scrollPulse 2s ease infinite;
   }
 
-  /* ── STATS ── */
-  .stats {
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  /* ── FEATURE STRIP ── */
+  .strip {
+    position: relative; z-index: 1;
+    padding: 80px 48px;
     display: flex; gap: 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    margin: 0 48px;
-  }
-
-  .stat {
-    flex: 1; padding: 40px 32px;
-    border-right: 1px solid var(--border);
-  }
-  .stat:last-child { border-right: none; }
-
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.8rem; font-weight: 800;
-    letter-spacing: -0.03em; color: var(--ink);
-  }
-
-  .stat-num span { color: var(--accent); }
-
-  .stat-label {
-    font-size: 0.82rem; color: var(--muted);
-    margin-top: 4px; font-weight: 400;
-  }
-
-  /* ── HOW IT WORKS ── */
-  .section {
-    padding: 100px 48px;
-  }
-
-  .section-tag {
-    font-size: 0.75rem; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 800; letter-spacing: -0.02em;
-    line-height: 1.1; max-width: 700px;
-    margin-bottom: 60px;
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    border-top: 1px solid rgba(74,124,89,0.1);
+    border-bottom: 1px solid rgba(74,124,89,0.1);
     overflow: hidden;
   }
 
-  .step {
-    padding: 36px 32px;
-    background: white;
-    border-right: 1px solid var(--border);
-    transition: background 0.2s;
+  .strip-item {
+    flex: 1; padding: 32px 36px;
+    border-right: 1px solid rgba(74,124,89,0.1);
+    transition: background 0.3s;
   }
-  .step:last-child { border-right: none; }
-  .step:hover { background: var(--ink); color: white; }
-  .step:hover .step-num { color: var(--accent2); }
-  .step:hover .step-label { color: rgba(255,255,255,0.5); }
+  .strip-item:last-child { border-right: none; }
+  .strip-item:hover { background: rgba(122,184,147,0.06); }
 
-  .step-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 3rem; font-weight: 800;
-    color: var(--border); line-height: 1;
-    margin-bottom: 20px;
-    transition: color 0.2s;
+  .strip-icon {
+    font-size: 1.8rem; margin-bottom: 16px;
+    display: block;
   }
 
-  .step h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem; font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .step-label {
-    font-size: 0.85rem; color: var(--muted);
-    line-height: 1.6; transition: color 0.2s;
-  }
-
-  /* ── METRICS ── */
-  .metrics-section {
-    padding: 100px 48px;
-    background: var(--ink); color: var(--paper);
-  }
-
-  .metrics-section .section-tag { color: var(--accent2); }
-
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 48px;
-  }
-
-  .metric-item {
-    padding: 28px 24px;
-    background: var(--ink);
-    transition: background 0.2s;
-  }
-  .metric-item:hover { background: #16161f; }
-
-  .metric-sigla {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem; font-weight: 800;
-    color: var(--accent); margin-bottom: 4px;
-  }
-
-  .metric-name {
-    font-size: 0.72rem; color: rgba(255,255,255,0.4);
-    text-transform: uppercase; letter-spacing: 0.06em;
-    margin-bottom: 10px;
-  }
-
-  .metric-desc {
-    font-size: 0.82rem; color: rgba(255,255,255,0.65);
-    line-height: 1.5;
-  }
-
-  /* ── FOR WHO ── */
-  .audience {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 48px;
-  }
-
-  .audience-card {
-    border: 1px solid var(--border);
-    border-radius: 12px; padding: 36px 28px;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .audience-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-
-  .audience-icon {
-    font-size: 2rem; margin-bottom: 16px;
-  }
-
-  .audience-card h3 {
-    font-family: 'Syne', sans-serif;
+  .strip-item h3 {
+    font-family: 'Playfair Display', serif;
     font-size: 1.15rem; font-weight: 700;
-    margin-bottom: 12px;
+    color: var(--dark); margin-bottom: 8px;
   }
 
-  .audience-card ul {
-    list-style: none; padding: 0;
-  }
-
-  .audience-card ul li {
+  .strip-item p {
     font-size: 0.85rem; color: var(--muted);
-    padding: 6px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 8px;
+    line-height: 1.65;
   }
-  .audience-card ul li:last-child { border-bottom: none; }
-  .audience-card ul li::before { content: '→'; color: var(--accent); font-size: 0.75rem; }
 
-  /* ── CTA FINAL ── */
-  .cta-section {
+  /* ── BIG STATEMENT ── */
+  .statement {
+    position: relative; z-index: 1;
+    padding: 120px 48px;
+    background: var(--dark);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .statement::before {
+    content: 'ORA';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 30vw; font-weight: 700;
+    color: rgba(255,255,255,0.02);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; white-space: nowrap;
+    letter-spacing: -0.05em;
+  }
+
+  .statement h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    font-weight: 400; color: white;
+    line-height: 1.3; max-width: 800px;
+    margin: 0 auto 40px;
+  }
+
+  .statement h2 em {
+    font-style: italic; color: var(--sage-light);
+  }
+
+  .statement p {
+    font-size: 1rem; color: rgba(255,255,255,0.5);
+    max-width: 520px; margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    position: relative; z-index: 1;
     padding: 120px 48px;
     text-align: center;
-    border-top: 1px solid var(--border);
   }
 
-  .cta-section h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 800; letter-spacing: -0.03em;
-    line-height: 1.05; margin-bottom: 24px;
+  .contact h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700; color: var(--dark);
+    margin-bottom: 16px;
   }
 
-  .cta-section p {
-    font-size: 1.05rem; color: var(--muted);
-    max-width: 480px; margin: 0 auto 40px;
+  .contact h2 em { font-style: italic; color: var(--sage); }
+
+  .contact p {
+    font-size: 1rem; color: var(--muted);
+    max-width: 440px; margin: 0 auto 40px;
     line-height: 1.7;
   }
 
-  /* ── FORM ── */
   .contact-form {
     display: flex; gap: 12px;
-    max-width: 460px; margin: 0 auto;
+    max-width: 440px; margin: 0 auto;
     flex-wrap: wrap; justify-content: center;
   }
 
   .contact-form input {
     flex: 1; min-width: 220px;
-    padding: 14px 18px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
+    padding: 14px 20px;
+    border: 1.5px solid var(--sage-pale);
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem; background: white;
-    outline: none; transition: border-color 0.2s;
+    outline: none; color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .contact-form input:focus { border-color: var(--accent); }
+  .contact-form input:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(74,124,89,0.1);
+  }
 
-  .form-msg {
-    font-size: 0.85rem; color: var(--accent);
-    margin-top: 12px; min-height: 20px;
-    display: none;
+  .form-confirm {
+    margin-top: 16px; font-size: 0.88rem;
+    color: var(--teal); display: none;
   }
 
   /* ── FOOTER ── */
   footer {
-    padding: 32px 48px;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px;
-  }
-
-  footer p {
-    font-size: 0.8rem; color: var(--muted);
+    position: relative; z-index: 1;
+    padding: 28px 48px;
+    border-top: 1px solid rgba(74,124,89,0.1);
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
   }
 
   .footer-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1rem;
-    color: var(--ink); text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 1rem;
+    color: var(--sage); text-decoration: none;
   }
-  .footer-logo span { color: var(--accent); }
+
+  footer p {
+    font-size: 0.78rem; color: var(--muted);
+  }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+  @keyframes riseUp {
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
-    .hero { padding: 100px 24px 60px; }
-    .stats { flex-direction: column; margin: 0 24px; }
-    .stat { border-right: none; border-bottom: 1px solid var(--border); }
-    .section { padding: 60px 24px; }
-    .metrics-section { padding: 60px 24px; }
-    .audience { grid-template-columns: 1fr; }
-    .cta-section { padding: 80px 24px; }
-    footer { padding: 24px; }
-    .hero-grid { display: none; }
+    .hero { padding: 100px 24px 80px; }
+    .strip { flex-direction: column; padding: 60px 24px; }
+    .strip-item { border-right: none; border-bottom: 1px solid rgba(74,124,89,0.1); }
+    .strip-item:last-child { border-bottom: none; }
+    .statement { padding: 80px 24px; }
+    .contact { padding: 80px 24px; }
+    footer { padding: 24px; flex-direction: column; text-align: center; }
   }
 </style>
 </head>
 <body>
 
+<!-- Canvas animado de fondo -->
+<canvas id="bg-canvas"></canvas>
+
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">ORA<span>.</span></a>
-  <a href="#contacto" class="nav-cta">Quiero una demo</a>
+  <a href="#" class="nav-logo">ORA</a>
+  <a href="#contacto" class="nav-cta">Quiero saber más</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">Protocolo ORA 2026 — Auditoría Lingüística con IA</div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 
-  <h1>Tu inglés,<br>analizado con<br><em>precisión clínica</em></h1>
+  <p class="hero-eyebrow">Auditoría Lingüística con Inteligencia Artificial</p>
+
+  <h1>El inglés<br>que <span class="italic">florece</span></h1>
 
   <p class="hero-sub">
-    ORA combina inteligencia artificial y pedagogía avanzada para analizar clases de inglés corporativo, generar reportes automáticos y medir el progreso real de cada alumno.
+    ORA analiza cada clase, mide el progreso real y guía el aprendizaje hacia donde tiene que ir. Como la naturaleza: con paciencia, precisión y propósito.
   </p>
 
   <div class="hero-actions">
-    <a href="#contacto" class="btn-primary">Solicitar demo gratuita</a>
-    <a href="#como-funciona" class="btn-ghost">Ver cómo funciona</a>
+    <a href="#contacto" class="btn-primary">Conocer ORA</a>
+    <a href="#que-es" class="btn-ghost">Descubrir más</a>
   </div>
 
-  <div class="hero-grid" aria-hidden="true">
-    <script>
-      document.write(Array(64).fill('<div class="hero-grid-cell"></div>').join(''));
-    </script>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats reveal">
-  <div class="stat">
-    <div class="stat-num">12<span>+</span></div>
-    <div class="stat-label">Variables lingüísticas analizadas por clase</div>
+<!-- STRIP -->
+<div class="strip" id="que-es">
+  <div class="strip-item reveal">
+    <span class="strip-icon">🌱</span>
+    <h3>Crecimiento medible</h3>
+    <p>Cada clase genera un reporte con métricas lingüísticas reales. El progreso deja de ser una sensación y se convierte en datos.</p>
   </div>
-  <div class="stat">
-    <div class="stat-num">3<span>×</span></div>
-    <div class="stat-label">Jerarquías de análisis del Protocolo ORA</div>
+  <div class="strip-item reveal">
+    <span class="strip-icon">🔬</span>
+    <h3>Diagnóstico profundo</h3>
+    <p>El Protocolo ORA analiza 12 variables del habla para identificar exactamente dónde está el alumno y hacia dónde puede crecer.</p>
   </div>
-  <div class="stat">
-    <div class="stat-num">A1<span>→</span>C2</div>
-    <div class="stat-label">Diagnóstico MCER automático por sesión</div>
+  <div class="strip-item reveal">
+    <span class="strip-icon">🌿</span>
+    <h3>Pedagogía humana</h3>
+    <p>La IA amplifica al profesor, no lo reemplaza. Los errores se interpretan como procesos cognitivos, no como fracasos.</p>
   </div>
-  <div class="stat">
-    <div class="stat-num">100<span>%</span></div>
-    <div class="stat-label">Reportes generados sin intervención manual</div>
+  <div class="strip-item reveal">
+    <span class="strip-icon">🌊</span>
+    <h3>Fluye con el tiempo</h3>
+    <p>ORA compara clase a clase, detecta patrones que se fosilizan y ajusta las recomendaciones a medida que el alumno evoluciona.</p>
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section class="section" id="como-funciona">
-  <div class="section-tag reveal">Cómo funciona</div>
-  <h2 class="section-title reveal">De la clase al reporte en minutos</h2>
-
-  <div class="steps reveal">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h3>Clase virtual</h3>
-      <p class="step-label">El profesor da la clase por Google Meet o Zoom. Fathom transcribe automáticamente la sesión con identificación de hablantes.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <h3>Análisis ORA</h3>
-      <p class="step-label">La IA procesa la transcripción aplicando el Protocolo ORA: calcula 12 métricas lingüísticas y detecta patrones de interlengua.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <h3>Reporte automático</h3>
-      <p class="step-label">Se genera un reporte detallado con nivel MCER estimado, errores detectados, evolución respecto a clases anteriores y homework prescripto.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <h3>Dashboard de progreso</h3>
-      <p class="step-label">La empresa accede a un dashboard con el avance de cada alumno, ROI de la capacitación y alertas de estancamiento.</p>
-    </div>
-  </div>
+<!-- STATEMENT -->
+<section class="statement">
+  <h2 class="reveal">
+    Aprender un idioma es<br>
+    <em>un proceso vivo.</em><br>
+    ORA lo acompaña.
+  </h2>
+  <p class="reveal">
+    Combinamos inteligencia artificial con el Protocolo ORA para generar reportes pedagógicos automáticos que realmente ayudan a crecer.
+  </p>
 </section>
 
-<!-- METRICS -->
-<section class="metrics-section">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-tag reveal">Variables ORA</div>
-    <h2 class="section-title reveal" style="color:white">12 métricas que<br>los profesores no<br>pueden ver solos</h2>
-
-    <div class="metrics-grid reveal">
-      <div class="metric-item">
-        <div class="metric-sigla">IDM</div>
-        <div class="metric-name">Interlanguage Deviation Matrix</div>
-        <div class="metric-desc">Densidad de desviaciones por cada 100 palabras</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">MLU</div>
-        <div class="metric-name">Mean Length of Utterance</div>
-        <div class="metric-desc">Ambición sintáctica y complejidad estructural</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">GCI</div>
-        <div class="metric-name">Grammatical Competence Indicators</div>
-        <div class="metric-desc">Precisión en estructuras gramaticales clave</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">CEI</div>
-        <div class="metric-name">Critical Error Index</div>
-        <div class="metric-desc">Control sobre estructuras gramaticales meta</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">TTI</div>
-        <div class="metric-name">Turn Take Index</div>
-        <div class="metric-desc">Autonomía y gestión del turno de habla</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">LR</div>
-        <div class="metric-name">Latency of Response</div>
-        <div class="metric-desc">Carga de procesamiento cognitivo en tiempo real</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">LCI</div>
-        <div class="metric-name">Lexical Competence Index</div>
-        <div class="metric-desc">Densidad de léxico especializado y técnico</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">DCI</div>
-        <div class="metric-name">Discourse Competence Index</div>
-        <div class="metric-desc">Cohesión discursiva mediante marcadores transicionales</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">PPI</div>
-        <div class="metric-name">Propositional Precision Index</div>
-        <div class="metric-desc">Eficacia en la transmisión de proposiciones</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">FRR</div>
-        <div class="metric-name">Flexibility and Register Range</div>
-        <div class="metric-desc">Adecuación del registro sociolingüístico</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">RR</div>
-        <div class="metric-name">Repair Ratio</div>
-        <div class="metric-desc">Monitoreo interno y autocorrección espontánea</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-sigla">IRL</div>
-        <div class="metric-name">Interlanguage Range Level</div>
-        <div class="metric-desc">Rango de complejidad estructural ejecutado</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOR WHO -->
-<section class="section" id="para-quien">
-  <div class="section-tag reveal">Para quién es ORA</div>
-  <h2 class="section-title reveal">Un reporte para cada perspectiva</h2>
-
-  <div class="audience reveal">
-    <div class="audience-card">
-      <div class="audience-icon">🏢</div>
-      <h3>Empresas</h3>
-      <ul>
-        <li>ROI de la capacitación en inglés</li>
-        <li>Dashboard ejecutivo de progreso</li>
-        <li>Alertas de estancamiento por alumno</li>
-        <li>Comparativa entre equipos</li>
-      </ul>
-    </div>
-    <div class="audience-card">
-      <div class="audience-icon">👩‍🏫</div>
-      <h3>Profesores</h3>
-      <ul>
-        <li>Reporte automático post-clase</li>
-        <li>Detección de errores fosilizados</li>
-        <li>Prescripción pedagógica personalizada</li>
-        <li>Seguimiento de homework</li>
-      </ul>
-    </div>
-    <div class="audience-card">
-      <div class="audience-icon">👤</div>
-      <h3>Alumnos</h3>
-      <ul>
-        <li>Nivel MCER actualizado por clase</li>
-        <li>Evolución visible de sus métricas</li>
-        <li>Homework contextualizado a su trabajo</li>
-        <li>Feedback motivacional y sin juicio</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="contacto">
-  <h2 class="reveal">¿Tu equipo<br>merece esto?</h2>
-  <p class="reveal">Dejanos tu email y te mostramos cómo ORA analiza una clase real de tu empresa en menos de 5 minutos.</p>
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <h2 class="reveal">¿Listo para<br><em>empezar</em>?</h2>
+  <p class="reveal">Dejanos tu email y te mostramos cómo ORA puede transformar el aprendizaje de inglés de tu equipo.</p>
 
   <form class="contact-form reveal" id="contactForm">
     <input type="email" id="emailInput" placeholder="tu@empresa.com" required>
-    <button type="submit" class="btn-primary">Quiero una demo</button>
+    <button type="submit" class="btn-primary">Contactar</button>
   </form>
-  <p class="form-msg" id="formMsg">✓ Recibido — te contactamos en las próximas 24hs.</p>
+  <p class="form-confirm" id="formConfirm">✦ Recibido — te escribimos pronto.</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">ORA<span>.</span></a>
-  <p>© 2026 ORA Learn. Protocolo ORA — Auditoría Lingüística con IA.</p>
-  <p style="font-size:0.75rem;color:#aaa">ora-learn.com</p>
+  <a href="#" class="footer-logo">ORA</a>
+  <p>© 2026 ORA Learn · ora-learn.com</p>
+  <p>Auditoría Lingüística con IA</p>
 </footer>
 
 <script>
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+// ── Canvas: partículas orgánicas flotantes ──────────────────────────────
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
 
-  // Form
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('emailInput').value;
-    const msg = document.getElementById('formMsg');
-    if (email) {
-      msg.style.display = 'block';
-      this.style.opacity = '0.4';
-      this.style.pointerEvents = 'none';
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = ['#4a7c59','#7ab893','#2a9d8f','#48cae4','#c8e6d4'];
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.r = Math.random() * 3 + 1;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = (Math.random() - 0.5) * 0.4 - 0.2;
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.life = 0;
+    this.maxLife = Math.random() * 300 + 200;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.life++;
+    if (this.life > this.maxLife) this.reset();
+  }
+  draw() {
+    const progress = this.life / this.maxLife;
+    const fade = progress < 0.1 ? progress / 0.1 : progress > 0.8 ? (1 - progress) / 0.2 : 1;
+    ctx.save();
+    ctx.globalAlpha = this.alpha * fade;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// Líneas orgánicas de fondo
+class Wave {
+  constructor(i) {
+    this.i = i;
+    this.y = (canvas.height / 4) * (i + 1);
+    this.amplitude = 40 + Math.random() * 60;
+    this.frequency = 0.002 + Math.random() * 0.002;
+    this.speed = 0.003 + Math.random() * 0.002;
+    this.phase = Math.random() * Math.PI * 2;
+    this.color = COLORS[i % COLORS.length];
+  }
+  draw(time) {
+    ctx.save();
+    ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let x = 0; x <= canvas.width; x += 4) {
+      const y = this.y + Math.sin(x * this.frequency + time * this.speed + this.phase) * this.amplitude;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+const particles = Array.from({length: 80}, () => new Particle());
+const waves = Array.from({length: 5}, (_, i) => new Wave(i));
+let time = 0;
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  time++;
+  waves.forEach(w => w.draw(time));
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ── Reveal on scroll ─────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      observer.unobserve(entry.target);
     }
   });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Form ─────────────────────────────────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value;
+  if (email) {
+    document.getElementById('formConfirm').style.display = 'block';
+    this.style.opacity = '0.3';
+    this.style.pointerEvents = 'none';
+  }
+});
 </script>
 </body>
 </html>
