@@ -7,17 +7,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  /* ═══════════════════════════════════════════════════════════════════
+     🎨 COLORES DE LA MARCA
+     Cada color es un código que empieza con # (ej: #4a7c59).
+     Para cambiar un color, reemplazá SOLO el código de la derecha del ":".
+     Podés buscar códigos de color en https://htmlcolorcodes.com
+     (elegís un color y copiás el código que empieza con #).
+     ⚠️ No borres el nombre de la izquierda (--sage, --teal, etc.).
+     ═══════════════════════════════════════════════════════════════════ */
   :root {
-    --sage: #4a7c59;
-    --sage-light: #7ab893;
-    --sage-pale: #c8e6d4;
-    --teal: #2a9d8f;
-    --sky: #48cae4;
-    --sky-pale: #caf0f8;
-    --cream: #f7f9f4;
-    --dark: #1a2e1e;
-    --muted: #6b8f71;
-    --white: #ffffff;
+    --sage: #4a7c59;        /* verde principal (logo, botones) */
+    --sage-light: #7ab893;  /* verde claro */
+    --sage-pale: #c8e6d4;   /* verde muy claro (bordes) */
+    --teal: #2a9d8f;        /* verde-azulado (acentos) */
+    --sky: #48cae4;         /* celeste */
+    --sky-pale: #caf0f8;    /* celeste muy claro */
+    --cream: #f7f9f4;       /* fondo crema de toda la página */
+    --dark: #1a2e1e;        /* verde casi negro (textos y sección oscura) */
+    --muted: #6b8f71;       /* gris-verde (textos secundarios) */
+    --white: #ffffff;       /* blanco */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -352,29 +360,47 @@
 </head>
 <body>
 
-<!-- Canvas animado de fondo -->
+<!-- ═══════════════════════════════════════════════════════════════════════
+     👋 HOLA! Esta es la página de ORA.
+
+     Podés cambiar el TEXTO que está entre las etiquetas > y <.
+     Ejemplo:   <h3>Crecimiento medible</h3>
+                        ↑ cambiá SOLO esto ↑
+
+     ✅ SÍ podés tocar: todo el texto que se lee en la página.
+     ⛔ NO toques: las cosas con < > como <h3>, <p>, class="...", href="...".
+        Si borrás un < o un > sin querer, la página se puede romper.
+
+     💡 Regla de oro: cambiá solo lo que está ENTRE los símbolos > y <.
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<!-- Canvas animado de fondo (⛔ NO TOCAR - es la animación de fondo) -->
 <canvas id="bg-canvas"></canvas>
 
-<!-- NAV -->
+<!-- ▼▼▼ BARRA DE ARRIBA (logo + botón) ▼▼▼ -->
 <nav>
   <a href="#" class="nav-logo">ORA</a>
-  <a href="#contacto" class="nav-cta">Quiero saber más</a>
+  <a href="#contacto" class="nav-cta">Quiero saber más</a>   <!-- ✏️ texto del botón -->
 </nav>
 
-<!-- HERO -->
+<!-- ▼▼▼ SECCIÓN PRINCIPAL / HERO (lo primero grande que se ve) ▼▼▼ -->
 <section class="hero">
-  <div class="orb orb-1"></div>
+  <div class="orb orb-1"></div>   <!-- ⛔ los 3 "orb" son luces de fondo, no tocar -->
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
+  <!-- ✏️ Frasecita chica de arriba -->
   <p class="hero-eyebrow">Auditoría Lingüística con Inteligencia Artificial</p>
 
+  <!-- ✏️ Título gigante. El <br> es un salto de línea. La palabra en <span class="italic"> sale en verde e itálica. -->
   <h1>El inglés<br>que <span class="italic">florece</span></h1>
 
+  <!-- ✏️ Texto debajo del título -->
   <p class="hero-sub">
     ORA analiza cada clase, mide el progreso real y guía el aprendizaje hacia donde tiene que ir. Como la naturaleza: con paciencia, precisión y propósito.
   </p>
 
+  <!-- ✏️ Texto de los dos botones -->
   <div class="hero-actions">
     <a href="#contacto" class="btn-primary">Conocer ORA</a>
     <a href="#que-es" class="btn-ghost">Descubrir más</a>
@@ -386,12 +412,17 @@
   </div>
 </section>
 
-<!-- STRIP -->
+<!-- ▼▼▼ LAS 4 TARJETAS ▼▼▼
+     Cada bloque "strip-item" es una tarjeta. Tiene:
+       • un ícono (emoji) entre <span>...</span>  → podés cambiar el emoji
+       • un título entre <h3>...</h3>
+       • una descripción entre <p>...</p>
+     💡 Podés copiar/pegar un bloque entero para agregar una 5ª tarjeta. -->
 <div class="strip" id="que-es">
   <div class="strip-item reveal">
-    <span class="strip-icon">🌱</span>
-    <h3>Crecimiento medible</h3>
-    <p>Cada clase genera un reporte con métricas lingüísticas reales. El progreso deja de ser una sensación y se convierte en datos.</p>
+    <span class="strip-icon">🌱</span>                                    <!-- ✏️ emoji -->
+    <h3>Crecimiento medible</h3>                                        <!-- ✏️ título -->
+    <p>Cada clase genera un reporte con métricas lingüísticas reales. El progreso deja de ser una sensación y se convierte en datos.</p>   <!-- ✏️ descripción -->
   </div>
   <div class="strip-item reveal">
     <span class="strip-icon">🔬</span>
@@ -410,7 +441,8 @@
   </div>
 </div>
 
-<!-- STATEMENT -->
+<!-- ▼▼▼ FRASE GRANDE SOBRE FONDO OSCURO ▼▼▼
+     Lo que esté entre <em>...</em> sale en verde claro. -->
 <section class="statement">
   <h2 class="reveal">
     Aprender un idioma es<br>
@@ -422,22 +454,25 @@
   </p>
 </section>
 
-<!-- CONTACT -->
+<!-- ▼▼▼ SECCIÓN DE CONTACTO (formulario de email) ▼▼▼ -->
 <section class="contact" id="contacto">
-  <h2 class="reveal">¿Listo para<br><em>empezar</em>?</h2>
-  <p class="reveal">Dejanos tu email y te mostramos cómo ORA puede transformar el aprendizaje de inglés de tu equipo.</p>
+  <h2 class="reveal">¿Listo para<br><em>empezar</em>?</h2>   <!-- ✏️ título -->
+  <p class="reveal">Dejanos tu email y te mostramos cómo ORA puede transformar el aprendizaje de inglés de tu equipo.</p>   <!-- ✏️ texto -->
 
+  <!-- ⛔ El formulario de abajo es delicado. Solo cambiá si querés:
+       • placeholder="..."  → el texto gris de ejemplo dentro del casillero
+       • el texto del botón "Contactar" -->
   <form class="contact-form reveal" id="contactForm">
     <input type="email" id="emailInput" placeholder="tu@empresa.com" required>
     <button type="submit" class="btn-primary">Contactar</button>
   </form>
-  <p class="form-confirm" id="formConfirm">✦ Recibido — te escribimos pronto.</p>
+  <p class="form-confirm" id="formConfirm">✦ Recibido — te escribimos pronto.</p>   <!-- ✏️ mensaje al enviar -->
 </section>
 
-<!-- FOOTER -->
+<!-- ▼▼▼ PIE DE PÁGINA ▼▼▼ -->
 <footer>
   <a href="#" class="footer-logo">ORA</a>
-  <p>© 2026 ORA Learn · ora-learn.com</p>
+  <p>© 2026 ORA Learn · ora-learn.com</p>            <!-- ✏️ (acordate de cambiar el año) -->
   <p>Auditoría Lingüística con IA</p>
 </footer>
 
