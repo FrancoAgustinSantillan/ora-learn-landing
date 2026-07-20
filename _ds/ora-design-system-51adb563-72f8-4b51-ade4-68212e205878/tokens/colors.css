@@ -1,0 +1,26 @@
+:root {
+  --ora-lime-green: #E2FFD5;
+  --ora-mint-green: #349375;
+  --ora-paper: #F9FAEF;
+  --ora-deep-ocean: #003E47;
+  --ora-white: #FFFFFF;
+  --ora-black: #000000;
+  --ora-glass-gray: #D9D9D9;
+  --ora-mist: #F5F5F5;
+  --ora-shadow-charcoal: #262626;
+
+  --surface-canvas: var(--ora-paper);
+  --surface-canvas-dark: var(--ora-deep-ocean);
+  --surface-inverse: var(--ora-lime-green);
+  --surface-glass-light: rgba(52,147,117,0.01);
+  --surface-glass-dark: rgba(217,217,217,0.01);
+
+  --text-primary: var(--ora-deep-ocean);
+  --text-inverse: var(--ora-lime-green);
+  --text-on-light: var(--ora-deep-ocean);
+  --text-muted: rgba(0,62,71,0.6);
+
+  --brand-accent: var(--ora-mint-green);
+  --border-hairline: rgba(226,255,213,0.5);
+  --shadow-color: rgba(0,0,0,0.1);
+}

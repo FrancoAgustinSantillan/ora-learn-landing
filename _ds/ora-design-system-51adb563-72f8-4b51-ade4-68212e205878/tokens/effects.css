@@ -1,0 +1,23 @@
+:root {
+  --glass-blur: 21.6px;
+  --glass-shadow-light: 0px 0px 3.6px 0px rgba(0,0,0,0.05), 0px 1.8px 14.4px 0px rgba(0,0,0,0.05), inset 0px 0px 50px -3.6px rgba(52,147,117,0.15);
+  --glass-shadow-dark: inset 3.6px 3.6px 40px -3.6px var(--ora-shadow-charcoal), inset -3.6px -3.6px 25px -3.6px var(--ora-shadow-charcoal), 0px 0px 3.6px 0px rgba(0,0,0,0.1), 0px 1.8px 14.4px 0px rgba(0,0,0,0.1);
+
+  --ease-standard: cubic-bezier(.4,0,.2,1);
+  --duration-fast: 120ms;
+  --duration-standard: 200ms;
+}
+
+/* Superficie "glass pill" usada por <Card>/<Dialog> del design system (ver components/) */
+.ora-glass-light {
+  background: var(--surface-glass-light);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow-light);
+}
+.ora-glass-dark {
+  background: var(--surface-glass-dark);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow-dark);
+}
