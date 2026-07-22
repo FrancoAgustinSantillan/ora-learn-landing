@@ -40,6 +40,12 @@
     @media (max-width:900px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:768px){.acortamos-sec{display:none}}
 
+    /* el runtime fuerza height:100% (una pantalla) en #dc-root/.sc-host;
+       esta pagina es mas larga que un viewport, asi que eso "desengancha"
+       el position:sticky del header apenas se scrollea mas alla del primer
+       100vh. Lo dejamos crecer con el contenido real. */
+    #dc-root, #dc-root > .sc-host { height: auto !important; min-height: 100%; }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       header{padding:14px 20px !important}
@@ -101,7 +107,6 @@
 <section ref="{{ trackRef }}" aria-label="Presentación de ORA y sus cuatro pilares" class="hero-pin" style="position:relative;height:160vh;background:var(--ora-paper)">
   <div ref="{{ heroRef }}" class="hero-inner" style="--p:0;position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
 
-    <span aria-hidden="true" class="hero-hud-label" style="position:absolute;top:28px;left:32px;font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase">N°001 — ORA / HERO</span>
     <span aria-hidden="true" class="hero-hud-label" style="position:absolute;bottom:28px;right:32px;font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase">CBA·AR 31.4201°S 64.1888°W</span>
 
     <svg aria-hidden="true" class="hero-crosshair" viewBox="0 0 60 60" style="position:absolute;top:26px;right:32px;width:26px;height:26px">
@@ -167,7 +172,6 @@
   <img alt="" src="uploads/image 632 - copia.png" aria-hidden="true" class="que-es-glass" style="position:absolute;top:2%;right:-7%;height:96%;width:auto;opacity:0.92;z-index:0;pointer-events:none">
   </sc-if>
   <div class="que-es-text" style="width:100%;max-width:1160px;margin:0 auto;padding-right:clamp(140px,24vw,340px);box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;position:relative;z-index:1">
-  <span style="font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase;margin-bottom:20px">N°002 — Qué es ORA</span>
   <h2 style="margin:0 0 24px;font-family:var(--font-display);font-weight:600;font-size:48px;letter-spacing:-0.02em;color:var(--ora-deep-ocean);text-align:left;max-width:640px">¿Qué es ORA?</h2>
   <p style="margin:0 0 72px;font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.5;color:var(--text-muted);text-align:left;max-width:640px">ORA es una <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-deep-ocean)">metodología híbrida</em> de capacitación de inglés para equipos técnicos. Combinamos clases en vivo orientadas a la fluidez y el team building con un motor de IA que hiper-personaliza las tareas y el feedback según el rol de cada colaborador.</p>
   </div>
@@ -178,7 +182,7 @@
         <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/andragogy.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/andragogy.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
         <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Andragogía</h3>
       </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Aprendizaje centrado en adultos, orientado a resultados laborales inmediatos. Nada de gramática por la gramática.</p>
+      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Aprendizaje centrado en adultos, orientado a resultados laborales inmediatos.</p>
     </div>
     <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
       <div style="display:flex;align-items:center;gap:12px">
@@ -213,7 +217,6 @@
 
 <section ref="{{ trackRef2 }}" class="acortamos-sec" aria-label="Acortamos distancias entre tu equipo y tus clientes" style="position:relative;height:1000px;background:var(--ora-deep-ocean);overflow:visible">
   <div ref="{{ stageRef2 }}" style="--p2:0;position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px">
-    <span style="position:absolute;top:28px;left:32px;font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:rgba(249,250,239,0.5);text-transform:uppercase">N°003 — Acortamos distancias</span>
     <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:1100px">
       <div style="position:relative;z-index:2;display:flex;align-items:center;gap:20px">
         <span style="flex-shrink:0;font-family:var(--font-display);font-weight:600;font-size:clamp(34px,6vw,80px);letter-spacing:-0.02em;color:var(--ora-paper);text-transform:uppercase;white-space:nowrap;transform:translateX(calc((1 - var(--p2)) * -60vw))">Acortamos</span>
@@ -227,7 +230,6 @@
 
 <section class="no-encontraras-sec" aria-label="Lo que no vas a encontrar en ORA" style="position:relative;background:var(--ora-deep-ocean);padding:0 48px 140px;display:flex;flex-direction:column;align-items:center">
   <div style="width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start">
-  <span style="font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:rgba(226,255,213,0.6);text-transform:uppercase;margin-bottom:20px">N°004 — Lo que no vas a encontrar</span>
   <h2 style="margin:0 0 64px;font-family:var(--font-display);font-weight:600;font-size:40px;letter-spacing:-0.02em;color:var(--ora-lime-green);text-align:left;max-width:700px">Lo que no vas a encontrar en ORA.</h2>
   <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:48px 40px;width:100%;max-width:1080px">
     <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
@@ -262,7 +264,6 @@
 </div>
 
 <section class="reveal-sec contact-sec" id="contacto" aria-label="Contacto" style="position:relative;background:var(--ora-paper);padding:120px 48px 140px;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
-  <span style="font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase;margin-bottom:20px">N°005 — Contacto</span>
   <h2 style="margin:0 0 16px;font-family:var(--font-display);font-weight:600;font-size:48px;letter-spacing:-0.02em;color:var(--ora-deep-ocean);text-align:center">Hablemos.</h2>
   <p style="margin:0 0 56px;font-family:var(--font-body);font-weight:300;font-size:18px;line-height:1.5;color:var(--text-muted);text-align:center;max-width:520px">Contanos sobre tu equipo y te mostramos cómo funciona ORA.</p>
 
