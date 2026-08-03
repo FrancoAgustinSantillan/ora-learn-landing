@@ -29,7 +29,7 @@
   #sib-container textarea::placeholder { font-family: Helvetica, sans-serif; text-align: left; color: #c0ccda; }
   #sib-container a { text-decoration: underline; color: #2BB2FC; }
   footer a[href^="mailto"]:hover, footer a[href*="linkedin"]:hover { color: #E2FFD5; }
-  footer a[href="#top"] svg { display: block; }
+  footer a[href="#inicio"] svg { display: block; }
 </style>
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 </head>
@@ -45,11 +45,13 @@
   <title>ORA para Staffing — Evaluación y capacitación de inglés de candidatos</title>
   <meta name="description" content="ORA es el partner de idioma de tu staffing: evaluamos el inglés profesional de cada candidato con métricas objetivas y lo capacitamos con seguimiento medible.">
   <meta name="content-language" content="es">
+  <link rel="canonical" href="https://ora-learn.com/staffing">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <meta name="theme-color" content="#F9FAEF">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ora-learn.com/staffing">
   <meta property="og:title" content="ORA para Staffing — Learn the new way">
   <meta property="og:description" content="Evaluación y capacitación de inglés de candidatos: nivel MCER verificado, IA que personaliza el aprendizaje y reporte constante.">
   <meta property="og:locale" content="es_AR">
@@ -57,20 +59,21 @@
   <meta name="twitter:title" content="ORA para Staffing — Learn the new way">
   <meta name="twitter:description" content="Evaluamos y capacitamos el inglés profesional de tus candidatos, con nivel verificado y progreso medible.">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"EducationalOrganization","name":"ORA","description":"Evaluación y capacitación de inglés de candidatos para empresas de staffing.","email":"info@ora-learn.com","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressCountry":"AR"},"sameAs":["https://www.linkedin.com/company/135297198"]}
+  {"@context":"https://schema.org","@type":"EducationalOrganization","name":"ORA","url":"https://ora-learn.com/staffing","description":"Evaluación y capacitación de inglés de candidatos para empresas de staffing.","email":"info@ora-learn.com","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressCountry":"AR"},"sameAs":["https://www.linkedin.com/company/135297198"]}
   </script>
   <style>
+    html{scroll-behavior:smooth}
     body{margin:0;background:var(--ora-paper);overflow-x:hidden}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    a{color:var(--ora-deep-ocean);text-decoration:none}
-    a:hover{color:var(--ora-mint-green)}
-    @keyframes scan-pulse{0%,100%{opacity:.35}50%{opacity:.9}}
-    @keyframes float-whole{0%{transform:translate(0,0) rotate(94deg) scale(2.05)}33%{transform:translate(0.6%,-1%) rotate(94.6deg) scale(2.05)}66%{transform:translate(-0.5%,0.8%) rotate(93.5deg) scale(2.05)}100%{transform:translate(0,0) rotate(94deg) scale(2.05)}}
-    @keyframes float-mobile{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @keyframes reveal-up{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
-    .pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
-    @media (max-width:900px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:768px){.acortamos-sec{display:none}}
+    a{color:var(--ora-mint-green);text-decoration:none}
+    a:hover{color:var(--ora-lime-green)}
+    .ora-grid-mark{position:absolute;border:1px dashed rgba(226,255,213,0.35);border-radius:50%;pointer-events:none}
+    .ora-crosshair{position:absolute;width:18px;height:18px;pointer-events:none}
+    .ora-crosshair::before,.ora-crosshair::after{content:"";position:absolute;background:rgba(226,255,213,0.5)}
+    .ora-crosshair::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%)}
+    .ora-crosshair::after{top:50%;left:0;width:100%;height:1px;transform:translateY(-50%)}
+    .ora-x::before,.ora-x::after{content:"";position:absolute;background:currentColor;left:50%;top:50%;width:2px;height:16px;transform-origin:center}
+    .ora-x::before{transform:translate(-50%,-50%) rotate(45deg)}
+    .ora-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
 
     /* el runtime fuerza height:100% (una pantalla) en #dc-root/.sc-host;
        esta pagina es mas larga que un viewport, asi que eso "desengancha"
@@ -78,297 +81,324 @@
        100vh. Lo dejamos crecer con el contenido real. */
     #dc-root, #dc-root > .sc-host { height: auto !important; min-height: 100%; }
 
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      header{padding:14px 20px !important}
-      header nav{gap:14px !important}
-      header .nav-link{display:none}
-      header .nav-cta{padding:8px 14px !important;font-size:12.5px !important}
-      header .header-logo{width:64px !important;height:25px !important}
-      header .header-logo svg{width:100%;height:auto;display:block}
-
-      .hero-pin{height:auto !important}
-      .hero-inner{--p:0 !important;position:relative !important;height:auto !important;min-height:100svh;overflow:visible !important;display:flex !important;flex-direction:column !important;align-items:stretch !important;justify-content:flex-start !important;padding:110px 24px 56px;box-sizing:border-box}
-      .hero-hud-label,.hero-crosshair{display:none}
-      .hero-glass{animation:float-mobile 7s ease-in-out infinite !important;transform:translateX(-50%) !important;position:absolute !important;inset:auto !important;top:2% !important;left:50% !important;width:min(80vw, 350px) !important;aspect-ratio:818/1415 !important;height:auto !important;z-index:0 !important;margin:0 !important}
-      .hero-wordmark{width:min(54vw,210px) !important;height:auto !important;position:relative;z-index:1}
-      .hero-wordmark svg{width:100%;height:auto;display:block}
-      .hero-tagline{font-size:19px !important;position:relative;z-index:1}
-
-      .hero-badges{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:420px;margin:32px auto 0}
-      .hero-badge{position:relative !important;inset:auto !important;z-index:1;transform:none !important;opacity:1 !important;width:100%;min-width:0 !important}
-      .hero-badge .badge-copy{max-height:none !important;opacity:1 !important;margin-top:6px !important}
-      .hero-badge .badge-label{white-space:normal !important;font-size:14px !important}
-
-      .que-es-sec{padding:48px 24px 56px !important;background:transparent !important}
-      .que-es-text{padding-right:0 !important;align-items:center !important;text-align:center !important}
-      .que-es-text h2,.que-es-text p{text-align:center !important;max-width:100% !important}
-      .que-es-glass{top:-4% !important;right:-24% !important;height:92% !important;opacity:0.4 !important}
-      .pillars-grid{grid-template-columns:1fr !important;position:relative !important;z-index:1 !important}
-
-      .banner-sec{padding:48px 24px !important}
-      .banner-sec > div{flex-direction:column !important;align-items:flex-start !important;gap:24px !important}
-      .banner-h2{font-size:24px !important}
-
-      .no-encontraras-sec{padding:0 24px 72px !important}
-      .no-encontraras-sec h2{font-size:30px !important}
-
-      .contact-sec{padding:64px 24px 72px !important}
-      .contact-sec h2{font-size:34px !important}
-
-      footer{padding:32px 24px !important;flex-direction:column;text-align:center}
-      footer > div{justify-content:center !important}
+    @media (max-width:900px){.hero-content{max-width:60vw !important}}
+    @media (max-width:768px){
+      header{padding:14px 20px !important;flex-wrap:wrap;row-gap:10px}
+      header nav{gap:10px !important}
+      header nav .ora-nav-desktop{display:none}
+      #inicio{padding-top:32px !important}
+      .hero-content{max-width:100% !important}
+      #proceso .proceso-grid{grid-template-columns:1fr !important;gap:40px !important}
+      #proceso .proceso-grid > div{padding-left:32px !important}
+      #proceso .proceso-line{display:none !important}
+      #proceso .proceso-num{position:static !important;bottom:auto !important;display:block !important;margin-bottom:8px !important}
+      #proceso .proceso-dot{position:absolute !important;left:0 !important;top:4px !important}
+      .metodo-grid{grid-template-columns:1fr !important}
     }
   </style>
 </helmet>
 
-<header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(249,250,239,0.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,62,71,0.12)">
-  <a href="#top" aria-label="ORA — inicio" class="header-logo" style="display:block;width:96px;height:37px;color:var(--ora-deep-ocean)">
-    <svg viewBox="0 0 3081 1187" width="96" height="37" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
-  </a>
-  <nav aria-label="Principal" style="display:flex;gap:40px;align-items:center">
-    <a href="#que-es-ora" class="nav-link" style="font-family:var(--font-body);font-size:15px;color:var(--ora-deep-ocean);letter-spacing:0.01em;white-space:nowrap">Qué es ORA</a>
-    <a href="#contacto" class="nav-cta" style="font-family:var(--font-body);font-size:15px;font-weight:600;padding:10px 22px;border:1px solid var(--ora-deep-ocean);border-radius:999px;color:var(--ora-deep-ocean)" style-hover="background:var(--ora-deep-ocean);color:var(--ora-paper)">Contáctanos</a>
-  </nav>
-</header>
+<div style="font-family:var(--font-body);background:var(--ora-paper);overflow-x:hidden">
 
-<main id="top">
-<h1 class="sr-only">ORA para Staffing — Learn the new way. Evaluación y capacitación de inglés de candidatos.</h1>
-<div aria-hidden="true" style="position:fixed;inset:0;z-index:200;pointer-events:none;opacity:0.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')"></div>
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(24px,5vw,64px);border-bottom:1px solid rgba(226,255,213,0.1);background:rgba(249,250,239,0.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
+    <a href="#inicio" aria-label="ORA — inicio" style="display:block;height:26px;width:auto;color:var(--ora-deep-ocean)">
+      <svg viewBox="0 0 3081 1187" width="68" height="26" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
+    </a>
+    <nav style="display:flex;align-items:center;gap:clamp(16px,3vw,40px)">
+      <a href="#proceso" style="font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--ora-deep-ocean);text-decoration:none" class="ora-nav-desktop">Proceso</a>
+      <a href="#metodo" style="font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--ora-deep-ocean);text-decoration:none" class="ora-nav-desktop">El método ORA</a>
+      <x-import component-from-global-scope="ORADesignSystem_51adb5.Button" hint-size="auto,40px" variant="inverse" size="sm" onClick="{{ scrollToForm }}">Solicitar diagnóstico</x-import>
+    </nav>
+  </header>
 
-<section ref="{{ trackRef }}" aria-label="Presentación de ORA y sus cuatro pilares" class="hero-pin" style="position:relative;height:160vh;background:var(--ora-paper)">
-  <div ref="{{ heroRef }}" class="hero-inner" style="--p:0;position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+  <section id="inicio" style="position:relative;padding:clamp(64px,10vw,120px) clamp(24px,6vw,80px) clamp(64px,8vw,100px);background:var(--ora-paper);overflow:hidden">
 
-    <span aria-hidden="true" class="hero-hud-label" style="position:absolute;bottom:28px;right:32px;font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase">CBA·AR 31.4201°S 64.1888°W</span>
-
-    <svg aria-hidden="true" class="hero-crosshair" viewBox="0 0 60 60" style="position:absolute;top:26px;right:32px;width:26px;height:26px">
-      <circle cx="30" cy="30" r="18" fill="none" stroke="var(--ora-deep-ocean)" stroke-width="1" opacity="0.5"></circle>
-      <line x1="30" y1="0" x2="30" y2="12" stroke="var(--ora-deep-ocean)" stroke-width="1" opacity="0.5"></line>
-      <line x1="30" y1="48" x2="30" y2="60" stroke="var(--ora-deep-ocean)" stroke-width="1" opacity="0.5"></line>
-      <line x1="0" y1="30" x2="12" y2="30" stroke="var(--ora-deep-ocean)" stroke-width="1" opacity="0.5"></line>
-      <line x1="48" y1="30" x2="60" y2="30" stroke="var(--ora-deep-ocean)" stroke-width="1" opacity="0.5"></line>
-    </svg>
-
-    <div aria-hidden="true" class="hero-glass" style="position:absolute;height:58vh;width:calc(58vh * 0.578);opacity:calc(1 - (var(--p) * 0.55));pointer-events:none;z-index:1;animation-name:float-whole;animation-duration:{{ floatDuration }}s;animation-timing-function:ease-in-out;animation-iteration-count:infinite">
-      <img alt="" src="uploads/image 632.png" fetchpriority="high" width="818" height="1415" style="position:absolute;inset:0;height:100%;width:100%;-webkit-mask-image:radial-gradient(ellipse 90% 85% at 45% 45%, black 0%, black 60%, transparent 100%);mask-image:radial-gradient(ellipse 90% 85% at 45% 45%, black 0%, black 60%, transparent 100%)">
+    <div style="position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,0.55) 30%,black 45%,black 100%);mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,0.55) 30%,black 45%,black 100%);z-index:0;pointer-events:none">
+      <video src="assets/hero-video.mp4" autoplay loop muted playsinline aria-hidden="true" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scaleX(-1)"></video>
     </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:280px;background:linear-gradient(to bottom,transparent,var(--ora-paper) 85%);z-index:0;pointer-events:none"></div>
 
-    <div style="position:relative;z-index:6;display:flex;flex-direction:column;align-items:center;gap:22px;transform:scale(calc(1 - var(--p) * 0.12))">
-      <div aria-hidden="true" class="hero-wordmark" style="width:340px;height:131px;color:var(--ora-deep-ocean);filter:drop-shadow(0 18px 30px rgba(0,62,71,0.25))">
-        <svg viewBox="0 0 3081 1187" width="340" height="131"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
-      </div>
-      <p class="hero-tagline" style="margin:0;font-family:var(--font-display);font-weight:600;font-size:26px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Learn the <em style="font-family:var(--font-accent);font-style:italic;font-weight:600">new way</em>.</p>
-    </div>
-
-    <div aria-hidden="true" style="position:absolute;bottom:44px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:max(0, calc(1 - var(--p) * 3))">
-      <span style="font-family:var(--font-body);font-size:10px;letter-spacing:0.24em;color:var(--text-muted);text-transform:uppercase">Scroll</span>
-      <span style="width:1px;height:34px;background:linear-gradient(to bottom, rgba(0,62,71,0.5), transparent)"></span>
-    </div>
-
-
-    <div class="hero-badges">
-      <div class="hero-badge" style="position:absolute;top:22%;left:26%;transform:translate(-50%,-50%) translate(calc((1 - var(--p)) * 24vw), calc((1 - var(--p)) * 28vh));z-index:7;opacity:var(--p)">
-        <div style="--reveal:0;background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.28);border-radius:999px;padding:13px 19px;min-width:calc(126px + var(--reveal) * 46px);display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;transition:all 200ms var(--ease-standard);cursor:default" style-hover="--reveal:1">
-          <span class="badge-label" style="font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-0.01em;color:var(--ora-deep-ocean);white-space:nowrap">Evaluación de nivel</span>
-          <span class="badge-copy" style="display:block;max-height:calc(var(--reveal) * 46px);margin-top:calc(var(--reveal) * 6px);opacity:var(--reveal);overflow:hidden;transition:all 200ms var(--ease-standard);font-family:var(--font-body);font-size:11.5px;line-height:1.35;color:var(--text-muted)">Medí el inglés real de cada candidato.</span>
-        </div>
-      </div>
-
-      <div class="hero-badge" style="position:absolute;top:25%;left:76%;transform:translate(-50%,-50%) translate(calc((1 - var(--p)) * -26vw), calc((1 - var(--p)) * 25vh));z-index:7;opacity:var(--p)">
-        <div style="--reveal:0;background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.28);border-radius:999px;padding:13px 19px;min-width:calc(126px + var(--reveal) * 46px);display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;transition:all 200ms var(--ease-standard);cursor:default" style-hover="--reveal:1">
-          <span class="badge-label" style="font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-0.01em;color:var(--ora-deep-ocean);white-space:nowrap">Capacitación a medida</span>
-          <span class="badge-copy" style="display:block;max-height:calc(var(--reveal) * 46px);margin-top:calc(var(--reveal) * 6px);opacity:var(--reveal);overflow:hidden;transition:all 200ms var(--ease-standard);font-family:var(--font-body);font-size:11.5px;line-height:1.35;color:var(--text-muted)">Cerrá la brecha según el puesto.</span>
-        </div>
-      </div>
-
-      <div class="hero-badge" style="position:absolute;top:75%;left:24%;transform:translate(-50%,-50%) translate(calc((1 - var(--p)) * 26vw), calc((1 - var(--p)) * -25vh));z-index:7;opacity:var(--p)">
-        <div style="--reveal:0;background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.28);border-radius:999px;padding:13px 19px;min-width:calc(126px + var(--reveal) * 46px);display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;transition:all 200ms var(--ease-standard);cursor:default" style-hover="--reveal:1">
-          <span class="badge-label" style="font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-0.01em;color:var(--ora-deep-ocean);white-space:nowrap">Inteligencia Híbrida</span>
-          <span class="badge-copy" style="display:block;max-height:calc(var(--reveal) * 46px);margin-top:calc(var(--reveal) * 6px);opacity:var(--reveal);overflow:hidden;transition:all 200ms var(--ease-standard);font-family:var(--font-body);font-size:11.5px;line-height:1.35;color:var(--text-muted)">Clases grupales, feedback personalizado.</span>
-        </div>
-      </div>
-
-      <div class="hero-badge" style="position:absolute;top:78%;left:74%;transform:translate(-50%,-50%) translate(calc((1 - var(--p)) * -24vw), calc((1 - var(--p)) * -28vh));z-index:7;opacity:var(--p)">
-        <div style="--reveal:0;background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.28);border-radius:999px;padding:13px 19px;min-width:calc(126px + var(--reveal) * 46px);display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;transition:all 200ms var(--ease-standard);cursor:default" style-hover="--reveal:1">
-          <span class="badge-label" style="font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-0.01em;color:var(--ora-deep-ocean);white-space:nowrap">Reporte Constante</span>
-          <span class="badge-copy" style="display:block;max-height:calc(var(--reveal) * 46px);margin-top:calc(var(--reveal) * 6px);opacity:var(--reveal);overflow:hidden;transition:all 200ms var(--ease-standard);font-family:var(--font-body);font-size:11.5px;line-height:1.35;color:var(--text-muted)">Progreso medible, listo para tu cliente.</span>
+    <div style="position:relative;max-width:1320px;margin:0 auto;z-index:1">
+      <div class="hero-content" style="display:flex;flex-direction:column;gap:32px;min-width:0;max-width:33vw">
+        <h1 style="font-family:var(--font-display);font-weight:600;letter-spacing:var(--tracking-tight);color:var(--ora-deep-ocean);font-size:clamp(36px,5.4vw,72px);line-height:1.02;margin:0;max-width:16ch">Elimina la barrera del idioma.</h1>
+        <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:clamp(17px,1.7vw,22px);line-height:1.45;max-width:52ch;margin:0">Conoce el nivel de tu equipo antes de presentarlo frente al cliente. Solicita nuestro <span style="font-family:var(--font-body);font-weight:700">examen de nivelación</span>, pensado para empresas de tecnología y validado con <span style="font-family:var(--font-body);font-weight:700">profesores reales</span>.</p>
+        <div>
+          <x-import component-from-global-scope="ORADesignSystem_51adb5.Button" hint-size="auto,52px" variant="primary" size="lg" onClick="{{ scrollToForm }}" style="{{ wFit }}">Comenzar</x-import>
         </div>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <section id="metodo" style="position:relative;background:var(--ora-paper);padding:clamp(26px,7.2vw,82px) clamp(24px,6vw,80px) clamp(64px,10vw,120px);overflow:hidden">
+    <div style="position:absolute;top:-12%;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(52,147,117,0.08) 0%,transparent 60%);pointer-events:none;z-index:0"></div>
+    <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1">
+      <h2 style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:clamp(28px,3.4vw,40px);line-height:1.15;margin:0 0 64px;max-width:640px">Capacitaciones <span style="font-family:var(--font-accent);font-style:italic;font-weight:500">pensadas</span> para staffing</h2>
 
-<section class="reveal-sec que-es-sec" id="que-es-ora" aria-label="Qué es ORA" style="position:relative;background:var(--ora-paper);padding:120px 48px 140px;display:flex;flex-direction:column;align-items:center;overflow:hidden;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
-<sc-if value="{{ showGlassBg }}" hint-placeholder-val="{{ true }}">
-  <img alt="" src="uploads/image 632 - copia.png" aria-hidden="true" class="que-es-glass" style="position:absolute;top:2%;right:-7%;height:96%;width:auto;opacity:0.92;z-index:0;pointer-events:none">
-  </sc-if>
-  <div class="que-es-text" style="width:100%;max-width:1160px;margin:0 auto;padding-right:clamp(140px,24vw,340px);box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;position:relative;z-index:1">
-  <h2 style="margin:0 0 24px;font-family:var(--font-display);font-weight:600;font-size:48px;letter-spacing:-0.02em;color:var(--ora-deep-ocean);text-align:left;max-width:640px">¿Qué es ORA?</h2>
-  <p style="margin:0 0 72px;font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.5;color:var(--text-muted);text-align:left;max-width:640px">ORA es el <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-deep-ocean)">partner de idioma</em> de tu staffing. Evaluamos el inglés profesional de cada candidato con métricas objetivas y lo capacitamos con clases en vivo y seguimiento medible: presentás perfiles con un nivel de inglés verificado, no con un «avanzado» del CV.</p>
-  </div>
+      <div class="metodo-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(32px,6vw,80px);align-items:start">
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div onMouseEnter="{{ setActive0 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span style="{{ titleStyle0 }}">Aumenta tu Win Rate</span>
+            </div>
+            <div style="{{ barStyle0 }}"></div>
+          </div>
+          <div onMouseEnter="{{ setActive1 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span style="{{ titleStyle1 }}">Optimiza el aprendizaje</span>
+            </div>
+            <div style="{{ barStyle1 }}"></div>
+          </div>
+          <div onMouseEnter="{{ setActive2 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span style="{{ titleStyle2 }}">Crea sinergia</span>
+            </div>
+            <div style="{{ barStyle2 }}"></div>
+          </div>
+          <div onMouseEnter="{{ setActive3 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span style="{{ titleStyle3 }}">Elimina la infantilización</span>
+            </div>
+            <div style="{{ barStyle3 }}"></div>
+          </div>
+        </div>
 
-  <div class="pillars-grid" style="width:100%;max-width:1160px;margin:0 auto;position:relative;z-index:1">
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/andragogy.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/andragogy.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Evaluación de nivel</h3>
+        <div style="position:relative;min-height:280px;padding-top:8px">
+          <sc-if value="{{ isActive0 }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:24px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/reporting.svg) no-repeat center/contain;mask:url(assets/icons/reporting.svg) no-repeat center/contain"></div>
+                <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Reporte grupal e individual</span>
+              </div>
+              <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:46ch">El reporte te permite adjuntar datos cuali/cuanti de habla real directamente a tu oferta comercial. <span style="font-family:var(--font-accent);font-style:italic">Reduce el rebote de candidatos</span> en la fase final con clientes de EE.UU.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">REPORTING</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">DATOS DE HABLA</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">ROI</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isActive1 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:24px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/hybrid-intelligence.svg) no-repeat center/contain;mask:url(assets/icons/hybrid-intelligence.svg) no-repeat center/contain"></div>
+                <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Inteligencia Híbrida</span>
+              </div>
+              <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:46ch">Combinamos clases en vivo con un <span style="font-family:var(--font-accent);font-style:italic">motor de IA</span> que personaliza tareas y feedback para cada profesional, acelerando el progreso sin perder el trato humano.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">IA</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">PERSONALIZACIÓN</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">FEEDBACK</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isActive2 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:24px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/team-building.svg) no-repeat center/contain;mask:url(assets/icons/team-building.svg) no-repeat center/contain"></div>
+                <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Team Building</span>
+              </div>
+              <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:46ch">Nos basamos en tus objetivos y fomentamos que tu squad <span style="font-family:var(--font-accent);font-style:italic">se conozca e interactúe</span> en entornos de negocios reales antes de tener que defender una estrategia frente al cliente final.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">COLABORACIÓN</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">CONFIANZA</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">SIMULACIÓN</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isActive3 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:24px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/andragogy.svg) no-repeat center/contain;mask:url(assets/icons/andragogy.svg) no-repeat center/contain"></div>
+                <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Andragogia</span>
+              </div>
+              <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:46ch">El método ORA se centra en el aprendizaje del adulto: utilizamos <span style="font-family:var(--font-accent);font-style:italic">metodología de andragogía</span> aplicada a entornos corporativos de alta exigencia. Evaluamos a tu talento con el respeto profesional que su trayectoria merece.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">APRENDIZAJE ADULTO</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">RESULTADOS</span>
+                <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">ALTA EXIGENCIA</span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
       </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Nivelatorio online que mide el inglés real de cada candidato (A1–C2), no el que dice el CV.</p>
     </div>
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/hybrid-intelligence.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/hybrid-intelligence.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Inteligencia Híbrida</h3>
-      </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Clases en vivo con un motor de IA que personaliza tareas y feedback según el rol de cada candidato.</p>
-    </div>
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/team-building.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/team-building.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Capacitación a medida</h3>
-      </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Planes para cerrar la brecha de idioma según el puesto que cada candidato va a ocupar.</p>
-    </div>
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/reporting.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/reporting.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Reporte Constante</h3>
-      </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Nivel MCER y progreso medibles, listos para adjuntar a la terna que presentás al cliente.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="reveal-sec banner-sec" aria-label="Empezar" style="position:relative;background:var(--ora-paper);padding:70px 48px;display:flex;overflow:visible;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
-  <div style="width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;z-index:3">
-  <h2 class="banner-h2" data-slide="left" style="margin:0;font-family:var(--font-display);font-weight:600;font-size:32px;letter-spacing:-0.02em;color:#349375;text-align:left;max-width:600px;opacity:0;transform:translateX(-60px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">Presentá candidatos con el inglés verificado, no autodeclarado.</h2>
-  <a href="#contacto" data-slide="right" style="flex-shrink:0;font-family:var(--font-display);font-weight:600;font-size:16px;color:#F9FAEF;background:#349375;padding:16px 34px;border-radius:999px;opacity:0;transform:translateX(60px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1), background-color 200ms var(--ease-standard)" style-hover="background-color:#2a7d63">Empezá ahora</a>
-  </div>
-</section>
+  <section id="proceso" style="background:var(--ora-paper);padding:clamp(64px,10vw,120px) clamp(24px,6vw,80px) clamp(24px,4vw,48px)">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="max-width:680px;margin-bottom:64px">
+        <h2 style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:clamp(30px,3.8vw,44px);line-height:1.08;margin:0">El proceso</h2>
+      </div>
 
-<section ref="{{ trackRef2 }}" class="acortamos-sec" aria-label="Acortamos distancias entre tus candidatos y tus clientes" style="position:relative;height:1000px;background:var(--ora-deep-ocean);overflow:visible">
-  <div ref="{{ stageRef2 }}" style="--p2:0;position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px">
-    <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:1100px">
-      <div style="position:relative;z-index:2;display:flex;align-items:center;gap:20px">
-        <span style="flex-shrink:0;font-family:var(--font-display);font-weight:600;font-size:clamp(34px,6vw,80px);letter-spacing:-0.02em;color:var(--ora-paper);text-transform:uppercase;white-space:nowrap;transform:translateX(calc((1 - var(--p2)) * -60vw))">Acortamos</span>
-        <span style="flex-shrink:0;font-family:var(--font-display);font-weight:600;font-size:clamp(34px,6vw,80px);letter-spacing:-0.02em;color:var(--ora-paper);text-transform:uppercase;white-space:nowrap;transform:translateX(calc((1 - var(--p2)) * 60vw))">distancias</span>
+      <div style="position:relative;margin-bottom:56px">
+        <div class="proceso-line" style="position:absolute;left:0;right:0;top:9px;height:2px;background:rgba(0,62,71,0.16)"></div>
+        <div class="proceso-grid" style="position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+          <sc-for list="{{ procesoSteps }}" as="s" hint-placeholder-count="4">
+            <div ref="{{ s.setRef }}" style="{{ s.wrapStyle }}">
+              <div class="proceso-dot" style="position:relative;height:20px">
+                <span class="proceso-num" style="{{ s.numStyle }}">{{ s.num }}</span>
+                <div style="width:20px;height:20px;border-radius:50%;background:var(--ora-mint-green);box-shadow:0 0 0 5px var(--ora-paper)"></div>
+              </div>
+              <div style="max-width:280px;display:flex;flex-direction:column;gap:8px">
+                <h3 style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px;margin:0">{{ s.title }}</h3>
+                <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:15px;line-height:1.55;margin:0">{{ s.desc }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
       </div>
-    </div>
-    <span style="opacity:var(--p2);margin-top:-24px;font-family:var(--font-body);font-weight:300;font-size:clamp(16px,2.2vw,24px);color:rgba(249,250,239,0.85);text-align:center">entre tus candidatos y tus clientes</span>
-    <p style="opacity:var(--p2);margin:0;font-family:var(--font-body);font-weight:300;font-size:18px;line-height:1.6;color:rgba(249,250,239,0.75);text-align:center;max-width:480px;padding:0 32px">Medimos y desarrollamos el inglés de tus candidatos con <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-paper)">nivel verificado</em>, IA y reportes que de verdad se leen.</p>
-  </div>
-</section>
 
-<section class="no-encontraras-sec" aria-label="Lo que no vas a encontrar en ORA" style="position:relative;background:var(--ora-deep-ocean);padding:0 48px 140px;display:flex;flex-direction:column;align-items:center">
-  <div style="width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start">
-  <h2 style="margin:0 0 64px;font-family:var(--font-display);font-weight:600;font-size:40px;letter-spacing:-0.02em;color:var(--ora-lime-green);text-align:left;max-width:700px">Lo que no vas a encontrar en ORA.</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:48px 40px;width:100%;max-width:1080px">
-    <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex-shrink:0;margin-top:4px"><path d="M1 1 L17 17 M17 1 L1 17" stroke="var(--ora-mint-green)" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;line-height:1.3;color:var(--ora-lime-green)">Nunca garantizaremos "aprender sin esfuerzo".</p>
-      </div>
-      <p style="margin:0 0 0 32px;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.55;color:rgba(226,255,213,0.65)">Adquirir una habilidad compleja exige rigor. Prometer lo contrario es un insulto a la inteligencia del profesional.</p>
     </div>
-    <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1) 120ms, transform 700ms cubic-bezier(.22,.61,.36,1) 120ms">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex-shrink:0;margin-top:4px"><path d="M1 1 L17 17 M17 1 L1 17" stroke="var(--ora-mint-green)" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;line-height:1.3;color:var(--ora-lime-green)">Nunca usaremos el término "clases divertidas".</p>
-      </div>
-      <p style="margin:0 0 0 32px;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.55;color:rgba(226,255,213,0.65)">Buscamos clases significativas. La satisfacción proviene del progreso real y la utilidad, no del entretenimiento superficial.</p>
-    </div>
-    <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1) 240ms, transform 700ms cubic-bezier(.22,.61,.36,1) 240ms">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex-shrink:0;margin-top:4px"><path d="M1 1 L17 17 M17 1 L1 17" stroke="var(--ora-mint-green)" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;line-height:1.3;color:var(--ora-lime-green)">Nunca "desaprobaremos" a nadie.</p>
-      </div>
-      <p style="margin:0 0 0 32px;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.55;color:rgba(226,255,213,0.65)">No somos jueces escolares. Evaluamos niveles de desempeño (B1, B2, C1) bajo estándares internacionales (Cambridge/CEFR) para medir competencia, no conducta.</p>
-    </div>
-  </div>
-  </div>
-</section>
+  </section>
 
-<div aria-hidden="true" style="position:relative;height:0;overflow:visible;display:flex;justify-content:center;z-index:10">
-  <div style="width:76px;height:76px;border-radius:50%;transform:translateY(-38px);background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.2);display:flex;align-items:center;justify-content:center;color:var(--ora-deep-ocean)">
-    <svg viewBox="0 0 3081 1187" width="34" height="13"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
-  </div>
 </div>
 
-</main>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showGlassBg&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Qué es ORA&quot;},&quot;floatDuration&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:7,&quot;min&quot;:6,&quot;max&quot;:30,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  trackRef = React.createRef();
-  heroRef = React.createRef();
-  trackRef2 = React.createRef();
-  stageRef2 = React.createRef();
+  state = {
+    activeIndex: 0,
+    progress: 0,
+  };
 
   componentDidMount() {
-    this.running = true;
-    const tick = () => {
-      if (!this.running) return;
-      const track = this.trackRef.current;
-      const hero = this.heroRef.current;
-      if (track && hero) {
-        const rect = track.getBoundingClientRect();
-        const total = rect.height - window.innerHeight;
-        const p = total > 0 ? Math.min(1, Math.max(0, (-rect.top / total) * 3)) : 0;
-        hero.style.setProperty('--p', p.toFixed(4));
-      }
-
-      const track2 = this.trackRef2.current;
-      const stage2 = this.stageRef2.current;
-      if (track2 && stage2) {
-        const rect2 = track2.getBoundingClientRect();
-        const vh2 = window.innerHeight;
-        const p2 = Math.min(1, Math.max(0, (vh2 - rect2.top) / (vh2 * 0.75)));
-        stage2.style.setProperty('--p2', p2.toFixed(4));
-      }
-
-      const vh = window.innerHeight;
-      document.querySelectorAll('.reveal-sec').forEach(el => {
-        if (el.dataset.revealed) return;
-        if (el.getBoundingClientRect().top < vh * 0.9) {
-          el.dataset.revealed = '1';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          el.querySelectorAll('[data-slide]').forEach(child => {
-            child.style.opacity = '1';
-            child.style.transform = 'translateX(0)';
-          });
-          el.querySelectorAll('[data-scale-in]').forEach(child => {
-            child.style.opacity = '1';
-            child.style.transform = 'translate(-50%,-50%) scale(1)';
-          });
-        }
+    const cycleMs = 8000;
+    const stepMs = 250;
+    this.methodTimer = setInterval(() => {
+      this.setState((s) => {
+        const next = s.progress + (stepMs / cycleMs) * 100;
+        if (next >= 100) return { progress: 0, activeIndex: (s.activeIndex + 1) % 4 };
+        return { progress: next };
       });
+    }, stepMs);
 
-      this.raf = requestAnimationFrame(tick);
-    };
-    this.raf = requestAnimationFrame(tick);
+    this.procesoRevealed = [false, false, false, false];
+    this.procesoObserver = new IntersectionObserver(
+      (entries) => {
+        let changed = false;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute("data-step-index"));
+            if (!this.procesoRevealed[idx]) { this.procesoRevealed[idx] = true; changed = true; }
+          }
+        });
+        if (changed) this.forceUpdate();
+      },
+      { threshold: 0.25 }
+    );
+    (this.procesoStepEls || []).forEach((el) => el && this.procesoObserver.observe(el));
   }
 
   componentWillUnmount() {
-    this.running = false;
-    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.methodTimer) clearInterval(this.methodTimer);
+    if (this.procesoObserver) this.procesoObserver.disconnect();
+  }
+
+  setActive(i) {
+    this.setState({ activeIndex: i, progress: 0 });
+  }
+
+  titleStyle(i) {
+    const active = this.state.activeIndex === i;
+    return {
+      fontFamily: "var(--font-display)",
+      fontWeight: 600,
+      fontSize: "clamp(18px,1.8vw,24px)",
+      lineHeight: 1.1,
+      color: "var(--ora-deep-ocean)",
+      opacity: active ? 1 : 0.28,
+      transition: "opacity 0.35s ease",
+    };
+  }
+
+  barStyle(i) {
+    const active = this.state.activeIndex === i;
+    return {
+      position: "absolute",
+      left: 0,
+      bottom: "-1px",
+      height: "2px",
+      width: active ? this.state.progress + "%" : "0%",
+      background: "var(--ora-mint-green)",
+      transition: active ? "none" : "width 0.2s ease",
+    };
+  }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  procesoStepData() {
+    if (!this.procesoStepEls) this.procesoStepEls = [null, null, null, null];
+    if (!this.procesoRevealed) this.procesoRevealed = [false, false, false, false];
+    const raw = [
+      { num: "01", title: "Contanos sobre tu equipo", desc: "Completa el formulario para que podamos armar un reporte que se adecue a tus objetivos." },
+      { num: "02", title: "Examen de diagnóstico", desc: "Tu equipo recibe una evaluación estructurada mediante Target Situation Analysis (TSA) que mide su capacidad comunicacional real y la mapea con sus objetivos profesionales." },
+      { num: "03", title: "Análisis contextualizado", desc: "Nuestro agente, junto con nuestros profesores, determinan el nivel de interlengua y te sugieren un plan de acción personalizado, optimizando la curva de aprendizaje sin fricciones." },
+      { num: "04", title: "Resultados", desc: "Recibís un informe con estadísticas de desempeño reales, basado en datos y analizado por expertos, que te da un panorama preciso para la toma de decisiones estratégicas." },
+    ];
+    return raw.map((s, i) => {
+      const revealed = this.procesoRevealed[i];
+      return {
+        ...s,
+        setRef: (el) => {
+          this.procesoStepEls[i] = el;
+          if (el) el.setAttribute("data-step-index", i);
+        },
+        wrapStyle: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          opacity: revealed ? 1 : 0,
+          transform: revealed ? "translateX(0)" : "translateX(-28px)",
+          transition: `opacity 0.55s ease ${i * 0.12}s, transform 0.55s ease ${i * 0.12}s`,
+        },
+        numStyle: {
+          position: "absolute",
+          left: 0,
+          bottom: "32px",
+          fontFamily: "var(--font-display)",
+          fontWeight: 600,
+          fontSize: "15px",
+          color: "var(--ora-mint-green)",
+          whiteSpace: "nowrap",
+          opacity: revealed ? 1 : 0,
+          transform: revealed ? "translateY(0)" : "translateY(10px)",
+          transition: `opacity 0.4s ease ${0.15 + i * 0.12}s, transform 0.4s ease ${0.15 + i * 0.12}s`,
+        },
+      };
+    });
   }
 
   renderVals() {
     return {
-      trackRef: this.trackRef,
-      heroRef: this.heroRef,
-      trackRef2: this.trackRef2,
-      stageRef2: this.stageRef2,
-      showGlassBg: this.props.showGlassBg ?? true,
-      floatDuration: this.props.floatDuration ?? 14
+      scrollToForm: () => this.scrollTo("form"),
+      procesoSteps: this.procesoStepData(),
+      setActive0: () => this.setActive(0),
+      setActive1: () => this.setActive(1),
+      setActive2: () => this.setActive(2),
+      setActive3: () => this.setActive(3),
+      titleStyle0: this.titleStyle(0),
+      titleStyle1: this.titleStyle(1),
+      titleStyle2: this.titleStyle(2),
+      titleStyle3: this.titleStyle(3),
+      barStyle0: this.barStyle(0),
+      barStyle1: this.barStyle(1),
+      barStyle2: this.barStyle(2),
+      barStyle3: this.barStyle(3),
+      isActive0: this.state.activeIndex === 0,
+      isActive1: this.state.activeIndex === 1,
+      isActive2: this.state.activeIndex === 2,
+      isActive3: this.state.activeIndex === 3,
+      wFit: { width: "fit-content" },
     };
   }
 }
 </script>
 
 <!-- Begin Brevo Form -->
-<section id="contacto" aria-label="Contacto" style="background:var(--ora-paper);padding:100px 48px 120px">
+<section id="form" aria-label="Contacto" style="background:var(--ora-paper);padding:24px 48px 120px">
 <div class="sib-form" style="text-align: center;
          background-color: #f9faef;
 
@@ -634,7 +664,7 @@ class Component extends DCLogic {
 </section>
 
 <footer style="background:var(--ora-deep-ocean);padding:48px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
-  <a href="#top" aria-label="ORA — volver al inicio" style="width:64px;height:25px;color:var(--ora-lime-green);display:block">
+  <a href="#inicio" aria-label="ORA — volver al inicio" style="width:64px;height:25px;color:var(--ora-lime-green);display:block">
     <svg viewBox="0 0 3081 1187" width="64" height="25"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
   </a>
   <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center">
