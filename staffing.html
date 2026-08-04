@@ -114,7 +114,7 @@
   <section id="inicio" style="position:relative;padding:clamp(64px,10vw,120px) clamp(24px,6vw,80px) clamp(64px,8vw,100px);background:var(--ora-paper);overflow:hidden">
 
     <div style="position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,0.55) 30%,black 45%,black 100%);mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,0.55) 30%,black 45%,black 100%);z-index:0;pointer-events:none">
-      <video src="assets/hero-video.mp4" autoplay loop muted playsinline aria-hidden="true" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scaleX(-1)"></video>
+      <video ref="{{ heroVideoRef }}" src="assets/hero-video.mp4" autoplay loop muted playsinline aria-hidden="true" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scaleX(-1)"></video>
     </div>
     <div style="position:absolute;left:0;right:0;bottom:0;height:280px;background:linear-gradient(to bottom,transparent,var(--ora-paper) 85%);z-index:0;pointer-events:none"></div>
 
@@ -256,12 +256,21 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  heroVideoRef = React.createRef();
   state = {
     activeIndex: 0,
     progress: 0,
   };
 
   componentDidMount() {
+    const video = this.heroVideoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      const playPromise = video.play();
+      if (playPromise && playPromise.catch) playPromise.catch(() => {});
+    }
+
     const cycleMs = 8000;
     const stepMs = 250;
     this.methodTimer = setInterval(() => {
@@ -373,6 +382,7 @@ class Component extends DCLogic {
 
   renderVals() {
     return {
+      heroVideoRef: this.heroVideoRef,
       scrollToForm: () => this.scrollTo("form"),
       procesoSteps: this.procesoStepData(),
       setActive0: () => this.setActive(0),
