@@ -120,7 +120,7 @@
   <section id="inicio" style="position:relative;padding:clamp(64px,10vw,120px) clamp(24px,6vw,80px) clamp(64px,8vw,100px);background:var(--ora-paper);overflow:hidden">
 
     <div style="position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,0.55) 30%,black 45%,black 100%);mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,0.55) 30%,black 45%,black 100%);z-index:0;pointer-events:none">
-      <video ref="{{ heroVideoRef }}" src="assets/hero-video.mp4" autoplay loop muted playsinline aria-hidden="true" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scaleX(-1)"></video>
+      <video ref="{{ heroVideoRef }}" src="assets/hero-video.mp4" autoplay loop muted playsinline webkit-playsinline="true" aria-hidden="true" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scaleX(-1)"></video>
     </div>
     <div style="position:absolute;left:0;right:0;bottom:0;height:280px;background:linear-gradient(to bottom,transparent,var(--ora-paper) 85%);z-index:0;pointer-events:none"></div>
 
@@ -355,6 +355,9 @@ class Component extends DCLogic {
       };
       tryPlay();
       video.addEventListener('loadedmetadata', tryPlay, { once: true });
+      ['touchstart', 'click', 'scroll'].forEach((evt) => {
+        document.addEventListener(evt, tryPlay, { once: true, passive: true });
+      });
     }
 
     const cycleMs = 8000;
