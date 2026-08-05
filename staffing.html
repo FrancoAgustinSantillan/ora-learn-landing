@@ -28,7 +28,7 @@
   #sib-container input::placeholder { font-family: Helvetica, sans-serif; text-align: left; color: #c0ccda; }
   #sib-container textarea::placeholder { font-family: Helvetica, sans-serif; text-align: left; color: #c0ccda; }
   #sib-container a { text-decoration: underline; color: #2BB2FC; }
-  footer a[href^="mailto"]:hover, footer a[href*="linkedin"]:hover { color: #E2FFD5; }
+  footer a[href^="mailto"]:hover, footer a[href*="linkedin"]:hover, footer a[href*="instagram"]:hover { color: #E2FFD5; }
   footer a[href="#inicio"] svg { display: block; }
 </style>
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
@@ -59,7 +59,7 @@
   <meta name="twitter:title" content="ORA para Staffing — Learn the new way">
   <meta name="twitter:description" content="Evaluamos y capacitamos el inglés profesional de tus candidatos, con nivel verificado y progreso medible.">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"EducationalOrganization","name":"ORA","url":"https://ora-learn.com/staffing","description":"Evaluación y capacitación de inglés de candidatos para empresas de staffing.","email":"info@ora-learn.com","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressCountry":"AR"},"sameAs":["https://www.linkedin.com/company/135297198"]}
+  {"@context":"https://schema.org","@type":"EducationalOrganization","name":"ORA","url":"https://ora-learn.com/staffing","description":"Evaluación y capacitación de inglés de candidatos para empresas de staffing.","email":"info@ora-learn.com","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressCountry":"AR"},"sameAs":["https://www.linkedin.com/company/135297198","https://www.instagram.com/ora.learn/"]}
   </script>
   <style>
     html{scroll-behavior:smooth}
@@ -74,6 +74,7 @@
     .ora-x::before,.ora-x::after{content:"";position:absolute;background:currentColor;left:50%;top:50%;width:2px;height:16px;transform-origin:center}
     .ora-x::before{transform:translate(-50%,-50%) rotate(45deg)}
     .ora-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+    .metodo-mobile-panel{display:none}
 
     /* el runtime fuerza height:100% (una pantalla) en #dc-root/.sc-host;
        esta pagina es mas larga que un viewport, asi que eso "desengancha"
@@ -83,9 +84,12 @@
 
     @media (max-width:900px){.hero-content{max-width:60vw !important}}
     @media (max-width:768px){
-      header{padding:14px 20px !important;flex-wrap:wrap;row-gap:10px}
-      header nav{gap:10px !important}
-      header nav .ora-nav-desktop{display:none}
+      header{padding:14px 20px !important}
+      header nav{gap:14px !important}
+      header .nav-link{display:none}
+      header .nav-cta{padding:8px 14px !important;font-size:12.5px !important}
+      header .header-logo{width:64px !important;height:25px !important}
+      header .header-logo svg{width:100%;height:auto;display:block}
       #inicio{padding-top:32px !important}
       .hero-content{max-width:100% !important}
       #proceso .proceso-grid{grid-template-columns:1fr !important;gap:40px !important}
@@ -94,20 +98,22 @@
       #proceso .proceso-num{position:static !important;bottom:auto !important;display:block !important;margin-bottom:8px !important}
       #proceso .proceso-dot{position:absolute !important;left:0 !important;top:4px !important}
       .metodo-grid{grid-template-columns:1fr !important}
+      .metodo-desktop-panel{display:none !important}
+      .metodo-mobile-panel{display:block !important}
     }
   </style>
 </helmet>
 
 <div style="font-family:var(--font-body);background:var(--ora-paper);overflow-x:hidden">
 
-  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(24px,5vw,64px);border-bottom:1px solid rgba(226,255,213,0.1);background:rgba(249,250,239,0.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
-    <a href="#inicio" aria-label="ORA — inicio" style="display:block;height:26px;width:auto;color:var(--ora-deep-ocean)">
-      <svg viewBox="0 0 3081 1187" width="68" height="26" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(249,250,239,0.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,62,71,0.12)">
+    <a href="#inicio" aria-label="ORA — inicio" class="header-logo" style="display:block;width:96px;height:37px;color:var(--ora-deep-ocean)">
+      <svg viewBox="0 0 3081 1187" width="96" height="37" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
     </a>
-    <nav style="display:flex;align-items:center;gap:clamp(16px,3vw,40px)">
-      <a href="#proceso" style="font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--ora-deep-ocean);text-decoration:none" class="ora-nav-desktop">Proceso</a>
-      <a href="#metodo" style="font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--ora-deep-ocean);text-decoration:none" class="ora-nav-desktop">El método ORA</a>
-      <x-import component-from-global-scope="ORADesignSystem_51adb5.Button" hint-size="auto,40px" variant="inverse" size="sm" onClick="{{ scrollToForm }}">Solicitar diagnóstico</x-import>
+    <nav aria-label="Principal" style="display:flex;gap:40px;align-items:center">
+      <a href="#proceso" class="nav-link" style="font-family:var(--font-body);font-size:15px;color:var(--ora-deep-ocean);letter-spacing:0.01em;white-space:nowrap">Proceso</a>
+      <a href="#metodo" class="nav-link" style="font-family:var(--font-body);font-size:15px;color:var(--ora-deep-ocean);letter-spacing:0.01em;white-space:nowrap">El método ORA</a>
+      <a href="#form" class="nav-cta" style="font-family:var(--font-body);font-size:15px;font-weight:600;padding:10px 22px;border:1px solid var(--ora-deep-ocean);border-radius:999px;color:var(--ora-deep-ocean);white-space:nowrap" style-hover="background:var(--ora-deep-ocean);color:var(--ora-paper)">Solicitar diagnóstico</a>
     </nav>
   </header>
 
@@ -136,33 +142,108 @@
 
       <div class="metodo-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(32px,6vw,80px);align-items:start">
         <div style="display:flex;flex-direction:column;gap:28px">
-          <div onMouseEnter="{{ setActive0 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span style="{{ titleStyle0 }}">Aumenta tu Win Rate</span>
+          <div>
+            <div onMouseEnter="{{ setActive0 }}" onClick="{{ setActive0 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span style="{{ titleStyle0 }}">Aumenta tu Win Rate</span>
+              </div>
+              <div style="{{ barStyle0 }}"></div>
             </div>
-            <div style="{{ barStyle0 }}"></div>
+            <div class="metodo-mobile-panel">
+              <sc-if value="{{ isActive0 }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:20px;padding:22px 0 6px">
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/reporting.svg) no-repeat center/contain;mask:url(assets/icons/reporting.svg) no-repeat center/contain"></div>
+                    <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Reporte grupal e individual</span>
+                  </div>
+                  <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:16px;line-height:1.6;margin:0">El reporte te permite adjuntar datos cuali/cuanti de habla real directamente a tu oferta comercial. <span style="font-family:var(--font-accent);font-style:italic">Reduce el rebote de candidatos</span> en la fase final con clientes de EE.UU.</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">REPORTING</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">DATOS DE HABLA</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">ROI</span>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
           </div>
-          <div onMouseEnter="{{ setActive1 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span style="{{ titleStyle1 }}">Optimiza el aprendizaje</span>
+
+          <div>
+            <div onMouseEnter="{{ setActive1 }}" onClick="{{ setActive1 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span style="{{ titleStyle1 }}">Optimiza el aprendizaje</span>
+              </div>
+              <div style="{{ barStyle1 }}"></div>
             </div>
-            <div style="{{ barStyle1 }}"></div>
+            <div class="metodo-mobile-panel">
+              <sc-if value="{{ isActive1 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:20px;padding:22px 0 6px">
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/hybrid-intelligence.svg) no-repeat center/contain;mask:url(assets/icons/hybrid-intelligence.svg) no-repeat center/contain"></div>
+                    <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Inteligencia Híbrida</span>
+                  </div>
+                  <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:16px;line-height:1.6;margin:0">Combinamos clases en vivo con un <span style="font-family:var(--font-accent);font-style:italic">motor de IA</span> que personaliza tareas y feedback para cada profesional, acelerando el progreso sin perder el trato humano.</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">IA</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">PERSONALIZACIÓN</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">FEEDBACK</span>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
           </div>
-          <div onMouseEnter="{{ setActive2 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span style="{{ titleStyle2 }}">Crea sinergia</span>
+
+          <div>
+            <div onMouseEnter="{{ setActive2 }}" onClick="{{ setActive2 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span style="{{ titleStyle2 }}">Crea sinergia</span>
+              </div>
+              <div style="{{ barStyle2 }}"></div>
             </div>
-            <div style="{{ barStyle2 }}"></div>
+            <div class="metodo-mobile-panel">
+              <sc-if value="{{ isActive2 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:20px;padding:22px 0 6px">
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/team-building.svg) no-repeat center/contain;mask:url(assets/icons/team-building.svg) no-repeat center/contain"></div>
+                    <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Team Building</span>
+                  </div>
+                  <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:16px;line-height:1.6;margin:0">Nos basamos en tus objetivos y fomentamos que tu squad <span style="font-family:var(--font-accent);font-style:italic">se conozca e interactúe</span> en entornos de negocios reales antes de tener que defender una estrategia frente al cliente final.</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">COLABORACIÓN</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">CONFIANZA</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">SIMULACIÓN</span>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
           </div>
-          <div onMouseEnter="{{ setActive3 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span style="{{ titleStyle3 }}">Elimina la infantilización</span>
+
+          <div>
+            <div onMouseEnter="{{ setActive3 }}" onClick="{{ setActive3 }}" style="position:relative;padding-bottom:18px;border-bottom:1px solid rgba(0,62,71,0.12);cursor:pointer">
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span style="{{ titleStyle3 }}">Elimina la infantilización</span>
+              </div>
+              <div style="{{ barStyle3 }}"></div>
             </div>
-            <div style="{{ barStyle3 }}"></div>
+            <div class="metodo-mobile-panel">
+              <sc-if value="{{ isActive3 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:20px;padding:22px 0 6px">
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <div style="width:36px;height:36px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask:url(assets/icons/andragogy.svg) no-repeat center/contain;mask:url(assets/icons/andragogy.svg) no-repeat center/contain"></div>
+                    <span style="font-family:var(--font-display);font-weight:600;color:var(--ora-deep-ocean);font-size:19px">Andragogia</span>
+                  </div>
+                  <p style="font-family:var(--font-body);font-weight:300;color:var(--text-muted);font-size:16px;line-height:1.6;margin:0">El método ORA se centra en el aprendizaje del adulto: utilizamos <span style="font-family:var(--font-accent);font-style:italic">metodología de andragogía</span> aplicada a entornos corporativos de alta exigencia. Evaluamos a tu talento con el respeto profesional que su trayectoria merece.</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">APRENDIZAJE ADULTO</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">RESULTADOS</span>
+                    <span style="font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--ora-mint-green);border:1.5px solid rgba(52,147,117,0.4);border-radius:999px;padding:8px 16px">ALTA EXIGENCIA</span>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
           </div>
         </div>
 
-        <div style="position:relative;min-height:280px;padding-top:8px">
+        <div class="metodo-desktop-panel" style="position:relative;min-height:280px;padding-top:8px">
           <sc-if value="{{ isActive0 }}" hint-placeholder-val="{{ true }}">
             <div style="display:flex;flex-direction:column;gap:24px">
               <div style="display:flex;align-items:center;gap:14px">
@@ -265,10 +346,15 @@ class Component extends DCLogic {
   componentDidMount() {
     const video = this.heroVideoRef.current;
     if (video) {
+      video.setAttribute('muted', '');
       video.muted = true;
       video.defaultMuted = true;
-      const playPromise = video.play();
-      if (playPromise && playPromise.catch) playPromise.catch(() => {});
+      const tryPlay = () => {
+        const playPromise = video.play();
+        if (playPromise && playPromise.catch) playPromise.catch(() => {});
+      };
+      tryPlay();
+      video.addEventListener('loadedmetadata', tryPlay, { once: true });
     }
 
     const cycleMs = 8000;
@@ -681,6 +767,7 @@ class Component extends DCLogic {
     <a href="mailto:info@ora-learn.com" style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(226,255,213,0.75);text-decoration:none">info@ora-learn.com</a>
     <span style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(226,255,213,0.55)">Córdoba, Argentina</span>
     <a href="https://www.linkedin.com/company/135297198" target="_blank" rel="noopener noreferrer" style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(226,255,213,0.75);text-decoration:none">LinkedIn</a>
+    <a href="https://www.instagram.com/ora.learn/" target="_blank" rel="noopener noreferrer" style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(226,255,213,0.75);text-decoration:none">Instagram</a>
   </div>
   <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(226,255,213,0.4)">© 2026 ORA</span>
 </footer>
