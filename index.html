@@ -464,6 +464,9 @@
        • el texto del botón "Contactar" -->
   <form class="contact-form reveal" id="contactForm">
     <input type="email" id="emailInput" placeholder="tu@empresa.com" required>
+    <!-- ⛔ campo trampa anti-spam (honeypot): invisible para personas, los bots lo completan. NO borrar. -->
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+           style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <button type="submit" class="btn-primary">Contactar</button>
   </form>
   <p class="form-confirm" id="formConfirm">✦ Recibido — te escribimos pronto.</p>   <!-- ✏️ mensaje al enviar -->
@@ -573,13 +576,44 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── Form ─────────────────────────────────────────────────────────────────
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+// Endpoint interno de ORA: guarda el lead en la BD y lo empuja a Brevo (la API key vive en el
+// servidor, nunca acá). Si cambia el dominio de la app, actualizá esta URL.
+const LEADS_ENDPOINT = 'https://app.ora-learn.com/api/leads';
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const email = document.getElementById('emailInput').value;
-  if (email) {
-    document.getElementById('formConfirm').style.display = 'block';
-    this.style.opacity = '0.3';
-    this.style.pointerEvents = 'none';
+  const form = this;
+  const email = document.getElementById('emailInput').value.trim();
+  const website = document.getElementById('website').value;   // honeypot
+  const confirm = document.getElementById('formConfirm');
+  const btn = form.querySelector('button[type="submit"]');
+  if (!email) return;
+
+  btn.disabled = true;
+  const textoBtn = btn.textContent;
+  btn.textContent = 'Enviando…';
+  try {
+    const resp = await fetch(LEADS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, website, origen: 'landing' }),
+    });
+    const data = await resp.json().catch(() => ({}));
+    if (resp.ok && data.ok) {
+      confirm.textContent = '✦ Recibido — te escribimos pronto.';
+      confirm.style.color = '';
+      confirm.style.display = 'block';
+      form.style.opacity = '0.3';
+      form.style.pointerEvents = 'none';
+    } else {
+      throw new Error((data && data.error) || 'error');
+    }
+  } catch (err) {
+    confirm.textContent = '⚠ No pudimos enviarlo. Probá de nuevo o escribinos a info@ora-learn.com';
+    confirm.style.color = '#c0392b';
+    confirm.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = textoBtn;
   }
 });
 </script>
