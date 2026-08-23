@@ -469,7 +469,7 @@
            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <button type="submit" class="btn-primary">Contactar</button>
   </form>
-  <p class="form-confirm" id="formConfirm">✦ Recibido — te escribimos pronto.</p>   <!-- ✏️ mensaje al enviar -->
+  <p class="form-confirm" id="formConfirm">✦ Se envió tu consulta — te escribimos pronto.</p>   <!-- ✏️ mensaje al enviar -->
 </section>
 
 <!-- ▼▼▼ PIE DE PÁGINA ▼▼▼ -->
@@ -600,7 +600,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     });
     const data = await resp.json().catch(() => ({}));
     if (resp.ok && data.ok) {
-      confirm.textContent = '✦ Recibido — te escribimos pronto.';
+      confirm.textContent = '✦ Se envió tu consulta — te escribimos pronto.';
       confirm.style.color = '';
       confirm.style.display = 'block';
       form.style.opacity = '0.3';
