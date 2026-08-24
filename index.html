@@ -434,7 +434,7 @@ class Component extends DCLogic {
         <span class="sib-form-message-panel__inner-text">
 
 
-                No hemos podido validar tu suscripción.
+                No pudimos enviar tu consulta. Probá de nuevo.
 
 
           </span>
@@ -450,7 +450,7 @@ class Component extends DCLogic {
         <span class="sib-form-message-panel__inner-text">
 
 
-                Se ha realizado tu suscripción.
+                Se envió tu consulta. Te escribimos pronto.
 
 
           </span>
@@ -717,5 +717,29 @@ class Component extends DCLogic {
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?render=6LfzeGMtAAAAAOrbhkn4E1RkAJH-o9cmkHIU1C_6&hl=es" async defer></script>
 <!-- End Brevo Form -->
+
+<!-- Captura interna ORA: además de Brevo, guarda el lead en la app (app.ora-learn.com/api/leads).
+     Es fire-and-forget: NO intercepta ni bloquea el envío a Brevo, solo lo duplica hacia lo nuestro. -->
+<script>
+(function () {
+  var f = document.getElementById('sib-form');
+  if (!f) return;
+  f.addEventListener('submit', function () {
+    try {
+      var input = document.getElementById('EMAIL');
+      var email = input && input.value;
+      if (!email) return;
+      // keepalive: la request sobrevive aunque Brevo navegue/recargue tras el submit.
+      // OJO: no mandamos el campo "website" del form (nuestro endpoint lo usa como honeypot).
+      fetch('https://app.ora-learn.com/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, origen: 'landing' }),
+        keepalive: true,
+      }).catch(function () {});
+    } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>
