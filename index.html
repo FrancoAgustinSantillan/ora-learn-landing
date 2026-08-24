@@ -62,16 +62,11 @@
 </div>
 <script>
 (function(){
-  var minTime = 700;
-  var start = Date.now();
   function hide(){
     var el = document.getElementById('ora-loader');
     if (!el) return;
-    var wait = Math.max(0, minTime - (Date.now() - start));
-    setTimeout(function(){
-      el.style.animation = 'ora-loader-fade 380ms ease forwards';
-      setTimeout(function(){ el.remove(); }, 380);
-    }, wait);
+    el.style.animation = 'ora-loader-fade 380ms ease forwards';
+    setTimeout(function(){ el.remove(); }, 380);
   }
   if (document.readyState === 'complete') hide();
   else window.addEventListener('load', hide);
