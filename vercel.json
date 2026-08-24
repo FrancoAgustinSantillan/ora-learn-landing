@@ -4,7 +4,10 @@
   "buildCommand": "",
   "installCommand": "",
   "outputDirectory": ".",
+  "redirects": [
+    { "source": "/staffing", "destination": "/english-for-tech", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/staffing", "destination": "/staffing.html" }
+    { "source": "/english-for-tech", "destination": "/english-for-tech.html" }
   ]
 }
