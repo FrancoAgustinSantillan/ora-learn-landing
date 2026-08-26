@@ -8,6 +8,8 @@
     { "source": "/staffing", "destination": "/english-for-tech", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/english-for-tech", "destination": "/english-for-tech.html" }
+    { "source": "/english-for-tech", "destination": "/english-for-tech.html" },
+    { "source": "/quienes-somos", "destination": "/quienes-somos.html" },
+    { "source": "/blog", "destination": "/blog.html" }
   ]
 }
