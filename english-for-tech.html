@@ -81,6 +81,19 @@
     .metodo-mobile-panel{display:none}
     .hero-mobile-still{display:none}
 
+    /* ── NAVBAR (glass pill) ── */
+    .ora-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px 32px}
+    .ora-nav-pill{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:48px;width:100%;max-width:1160px;padding:14px 28px;background:rgba(255,255,255,0.18);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);border-radius:999px;box-shadow:inset 0 1px 1px rgba(255,255,255,0.6),inset 0 -1px 1px rgba(0,62,71,0.05),0 8px 20px rgba(0,62,71,0.1)}
+    .ora-nav-links,.ora-nav-actions{display:flex;align-items:center}
+    .ora-nav-links{gap:6px}
+    .ora-nav-actions{gap:12px;flex-shrink:0}
+    header .nav-link{font-family:var(--font-body);font-size:14.5px;color:var(--ora-deep-ocean);letter-spacing:0.01em;white-space:nowrap;padding:9px 16px;border-radius:999px;transition:background 180ms ease}
+    header .nav-link:hover{background:rgba(52,147,117,0.14);color:var(--ora-deep-ocean)}
+    header .nav-cta{position:relative;font-family:var(--font-body);font-size:14.5px;font-weight:600;padding:10px 22px;border:1px solid var(--ora-deep-ocean);border-radius:999px;color:var(--ora-deep-ocean);white-space:nowrap;transition:background 180ms ease,color 180ms ease,border-color 180ms ease}
+    header .nav-cta::before{content:'';position:absolute;inset:-14px;border-radius:999px;background:rgba(52,147,117,0.55);filter:blur(16px);opacity:0;z-index:-1;transition:opacity 220ms ease}
+    header .nav-cta:hover{background:var(--ora-mint-green);border-color:var(--ora-mint-green);color:var(--ora-paper)}
+    header .nav-cta:hover::before{opacity:1}
+
     /* el runtime fuerza height:100% (una pantalla) en #dc-root/.sc-host;
        esta pagina es mas larga que un viewport, asi que eso "desengancha"
        el position:sticky del header apenas se scrollea mas alla del primer
@@ -89,8 +102,8 @@
 
     @media (max-width:900px){.hero-content{max-width:60vw !important}}
     @media (max-width:768px){
-      header{padding:14px 20px !important}
-      header nav{gap:14px !important}
+      .ora-nav{padding:14px 20px !important}
+      .ora-nav-pill{padding:10px 16px !important;gap:16px !important}
       header .nav-link{display:none}
       header .nav-cta{padding:8px 14px !important;font-size:12.5px !important}
       header .header-logo{width:64px !important;height:25px !important}
@@ -124,15 +137,21 @@
 
 <div style="font-family:var(--font-body);background:var(--ora-paper);overflow-x:hidden">
 
-  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(249,250,239,0.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,62,71,0.12)">
-    <a href="https://ora-learn.com/" aria-label="ORA | inicio" class="header-logo" style="display:block;width:96px;height:37px;color:var(--ora-deep-ocean)">
-      <svg viewBox="0 0 3081 1187" width="96" height="37" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
-    </a>
-    <nav aria-label="Principal" style="display:flex;gap:40px;align-items:center">
-      <a href="#proceso" class="nav-link" style="font-family:var(--font-body);font-size:15px;color:var(--ora-deep-ocean);letter-spacing:0.01em;white-space:nowrap">Proceso</a>
-      <a href="#metodo" class="nav-link" style="font-family:var(--font-body);font-size:15px;color:var(--ora-deep-ocean);letter-spacing:0.01em;white-space:nowrap">El método ORA</a>
-      <a href="#form" class="nav-cta" style="font-family:var(--font-body);font-size:15px;font-weight:600;padding:10px 22px;border:1px solid var(--ora-deep-ocean);border-radius:999px;color:var(--ora-deep-ocean);white-space:nowrap" style-hover="background:var(--ora-deep-ocean);color:var(--ora-paper)">Solicitar diagnóstico</a>
-    </nav>
+  <header class="ora-nav">
+    <div class="ora-nav-pill">
+      <a href="https://ora-learn.com/" aria-label="ORA | inicio" class="header-logo" style="display:block;width:84px;height:32px;color:var(--ora-deep-ocean);flex-shrink:0">
+        <svg viewBox="0 0 3081 1187" width="84" height="32" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="currentColor" fill-rule="nonzero"></path></svg>
+      </a>
+      <nav aria-label="Principal" class="ora-nav-links">
+        <a href="https://ora-learn.com/#que-es-ora" class="nav-link">Qué es ORA</a>
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/quienes-somos" class="nav-link">Nosotros</a>
+      </nav>
+      <div class="ora-nav-actions">
+        <a href="https://app.ora-learn.com/login" class="nav-link">Log in</a>
+        <a href="#form" class="nav-cta">Contáctanos</a>
+      </div>
+    </div>
   </header>
 
   <section id="inicio" style="position:relative;padding:clamp(64px,10vw,120px) clamp(24px,6vw,80px) clamp(64px,8vw,100px);background:var(--ora-paper);overflow:hidden">
