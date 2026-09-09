@@ -11,8 +11,7 @@
 <title>Blog | ORA</title>
 <meta name="description" content="Ideas, metodología y aprendizajes sobre capacitación de inglés para equipos técnicos. El blog de ORA.">
 <meta name="content-language" content="es">
-<!-- Página en construcción: no indexar hasta tener el contenido final. -->
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://ora-learn.com/blog">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
@@ -22,7 +21,13 @@
   body{margin:0;background:var(--ora-paper);overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh}
   a{color:var(--ora-deep-ocean);text-decoration:none}
   a:hover{color:var(--ora-mint-green)}
-  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px}
+  main{flex:1}
+
+  .blog-index-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  @media (max-width:900px){.blog-index-grid{grid-template-columns:1fr}}
+  .blog-card{display:flex;flex-direction:column;background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;overflow:hidden;transition:transform 220ms var(--ease-standard)}
+  .blog-card:hover{transform:translateY(-4px)}
+  .blog-thumb{width:100%;height:190px;display:block;object-fit:cover;object-position:center 30%;background:linear-gradient(135deg, rgba(52,147,117,0.35), rgba(226,255,213,0.55))}
 
   /* ── NAVBAR (glass pill) ── */
   .ora-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px 32px}
@@ -44,6 +49,9 @@
     header .nav-link{display:none}
     header .header-logo{width:64px !important;height:25px !important}
     header .header-logo svg{width:100%;height:auto;display:block}
+    .blog-hero{padding:56px 24px 48px !important}
+    .blog-hero h1{font-size:34px !important}
+    .blog-articles-sec{padding:0 24px 64px !important}
   }
 </style>
 </head>
@@ -67,10 +75,48 @@
 </header>
 
 <main>
-  <span style="font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--ora-mint-green)">Blog</span>
-  <h1 style="margin:18px 0 0;font-family:var(--font-display);font-weight:600;font-size:clamp(34px,6vw,56px);letter-spacing:-0.02em;color:var(--ora-deep-ocean);max-width:720px">Pronto, ideas que valen la pena leer.</h1>
-  <p style="margin:22px 0 0;font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.5;color:var(--text-muted);max-width:560px">Estamos preparando artículos sobre metodología, inteligencia híbrida y cómo se aprende inglés de verdad en equipos técnicos.</p>
-  <a href="/#contacto" style="margin-top:40px;font-family:var(--font-display);font-weight:600;font-size:16px;color:#F9FAEF;background:#349375;padding:16px 34px;border-radius:999px">Contáctanos</a>
+  <section class="blog-hero" aria-label="Blog de ORA" style="position:relative;background:var(--ora-paper);padding:100px 48px 80px;display:flex;flex-direction:column;align-items:center">
+    <div style="width:100%;max-width:1160px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start">
+      <h1 style="margin:0 0 20px;font-family:var(--font-display);font-weight:600;font-size:52px;letter-spacing:-0.02em;color:var(--ora-deep-ocean);max-width:640px">Cultura, Talento e Inglés Corporativo</h1>
+      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:19px;line-height:1.5;color:var(--text-muted);max-width:560px">Ideas y recursos sobre inglés para equipos, IA y el futuro del trabajo.</p>
+    </div>
+  </section>
+
+  <section class="blog-articles-sec" aria-label="Artículos" style="position:relative;background:var(--ora-paper);padding:0 48px 100px;display:flex;justify-content:center">
+    <div class="blog-index-grid" style="width:100%;max-width:1160px;margin:0 auto">
+
+      <a href="/blog/auditoria-interlengua" class="blog-card">
+        <img class="blog-thumb" src="/assets/blog/auditoria-interlengua.jpg" alt="" loading="lazy" width="1200" height="896">
+        <div style="display:flex;flex-direction:column;gap:14px;padding:28px">
+          <span style="align-self:flex-start;font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.04em;color:var(--ora-deep-ocean);background:rgba(52,147,117,0.14);padding:5px 12px;border-radius:999px">Novedades ORA</span>
+          <h2 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;line-height:1.3;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Auditoría de Interlengua: una perspectiva científica para líderes que necesitan hablar inglés</h2>
+          <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:14.5px;line-height:1.5;color:var(--text-muted)">Por qué medir el interlenguaje real de tu equipo, antes de elegir cómo capacitarlo, cambia todo el resultado.</p>
+          <span style="font-family:var(--font-body);font-size:12.5px;color:var(--text-muted)">12 mar 2026 · 6 min</span>
+        </div>
+      </a>
+
+      <a href="/blog/andragogia-roi" class="blog-card">
+        <img class="blog-thumb" src="/assets/blog/andragogia-roi.jpg" alt="" loading="lazy" width="1200" height="896">
+        <div style="display:flex;flex-direction:column;gap:14px;padding:28px">
+          <span style="align-self:flex-start;font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.04em;color:var(--ora-deep-ocean);background:rgba(52,147,117,0.14);padding:5px 12px;border-radius:999px">Andragogía</span>
+          <h2 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;line-height:1.3;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Inglés profesional: la andragogía como estrategia de retorno de inversión</h2>
+          <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:14.5px;line-height:1.5;color:var(--text-muted)">Capacitar adultos no es enseñar gramática dos veces. Es diseñar para el resultado que paga la factura.</p>
+          <span style="font-family:var(--font-body);font-size:12.5px;color:var(--text-muted)">28 feb 2026 · 5 min</span>
+        </div>
+      </a>
+
+      <a href="/blog/inteligencia-hibrida-idiomas" class="blog-card">
+        <img class="blog-thumb" src="/assets/blog/inteligencia-hibrida-idiomas.jpg" alt="" loading="lazy" width="1200" height="896">
+        <div style="display:flex;flex-direction:column;gap:14px;padding:28px">
+          <span style="align-self:flex-start;font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.04em;color:var(--ora-deep-ocean);background:rgba(52,147,117,0.14);padding:5px 12px;border-radius:999px">Inteligencia Híbrida</span>
+          <h2 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;line-height:1.3;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">¿Cómo se aplican los principios de la Inteligencia Híbrida a la capacitación de idiomas?</h2>
+          <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:14.5px;line-height:1.5;color:var(--text-muted)">Ni todo humano, ni todo IA. Cómo dividimos el trabajo entre docentes y motor de personalización.</p>
+          <span style="font-family:var(--font-body);font-size:12.5px;color:var(--text-muted)">15 feb 2026 · 7 min</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
 </main>
 
 <footer style="background:var(--ora-deep-ocean);padding:48px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
