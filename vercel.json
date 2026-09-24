@@ -4,29 +4,12 @@
   "buildCommand": "",
   "installCommand": "",
   "outputDirectory": ".",
-  "redirects": [
-    {
-      "source": "/staffing",
-      "destination": "/english-for-tech",
-      "permanent": true
-    }
-  ],
   "rewrites": [
-    {
-      "source": "/english-for-tech",
-      "destination": "/english-for-tech.html"
-    },
-    {
-      "source": "/quienes-somos",
-      "destination": "/quienes-somos.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/politica-privacidad",
-      "destination": "/politica-privacidad.html"
-    }
+    { "source": "/staffing", "destination": "/staffing.html" },
+    { "source": "/english-for-tech", "destination": "/english-for-tech.html" },
+    { "source": "/quienes-somos", "destination": "/quienes-somos.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/blog/:slug", "destination": "/blog/:slug.html" },
+    { "source": "/politica-privacidad", "destination": "/politica-privacidad.html" }
   ]
 }
