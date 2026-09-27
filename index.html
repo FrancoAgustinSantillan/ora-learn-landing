@@ -132,6 +132,17 @@
     @media (max-width:900px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:768px){.acortamos-sec{display:none}}
 
+    /* ── QUÉ ES ORA (redesign) ── */
+    .ora-glass-light{background:var(--surface-glass-light);backdrop-filter:blur(21.6px);-webkit-backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14)}
+    .ora-hero-row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,0.95fr);gap:48px;align-items:center}
+    @media (max-width:900px){.ora-hero-row{grid-template-columns:1fr}}
+    @keyframes ora-drift{0%{transform:translate(0,0)}50%{transform:translate(-10px,14px)}100%{transform:translate(0,0)}}
+    @keyframes ora-card-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    .ora-pillar-card{will-change:transform,opacity;opacity:0;animation:ora-card-in 0.7s cubic-bezier(0.2,0.8,0.2,1) forwards}
+    .ora-pillar-card:hover{box-shadow:0 20px 40px -12px rgba(0,62,71,0.25)}
+    .ora-pillar-card .ora-icon{transition:transform 0.3s ease}
+    .ora-pillar-card:hover .ora-icon{transform:scale(1.12)}
+
     /* ── BLOG PREVIEW ── */
     .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
     @media (max-width:900px){.blog-grid{grid-template-columns:1fr}}
@@ -168,9 +179,11 @@
       .hero-badge .badge-label{white-space:normal !important;font-size:14px !important}
 
       .que-es-sec{padding:48px 24px 56px !important;background:transparent !important}
-      .que-es-text{padding-right:0 !important;align-items:center !important;text-align:center !important}
+      .que-es-text{align-items:center !important;text-align:center !important}
       .que-es-text h2,.que-es-text p{text-align:center !important;max-width:100% !important}
+      .que-es-text h2{justify-content:center !important}
       .que-es-glass{top:-4% !important;right:-24% !important;height:92% !important;opacity:0.4 !important}
+      .ora-hero-row{grid-template-columns:1fr !important;gap:32px !important}
       .pillars-grid{grid-template-columns:1fr !important;position:relative !important;z-index:1 !important}
 
       .banner-sec{padding:48px 24px !important}
@@ -277,42 +290,47 @@
 </section>
 
 <section class="reveal-sec que-es-sec" id="que-es-ora" aria-label="Qué es ORA" style="position:relative;background:var(--ora-paper);padding:120px 48px 140px;display:flex;flex-direction:column;align-items:center;overflow:hidden;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
+  <div aria-hidden="true" style="position:absolute;top:-220px;right:-160px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(52,147,117,0.30) 0%,rgba(52,147,117,0) 70%);pointer-events:none;animation:ora-drift 14s ease-in-out infinite;z-index:0"></div>
 <sc-if value="{{ showGlassBg }}" hint-placeholder-val="{{ true }}">
   <img alt="" src="uploads/image 632 - copia.png" aria-hidden="true" class="que-es-glass" style="position:absolute;top:2%;right:-7%;height:96%;width:auto;opacity:0.92;z-index:0;pointer-events:none">
   </sc-if>
-  <div class="que-es-text" style="width:100%;max-width:1160px;margin:0 auto;padding-right:clamp(140px,24vw,340px);box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;position:relative;z-index:1">
-  <h2 style="margin:0 0 24px;font-family:var(--font-display);font-weight:600;font-size:48px;letter-spacing:-0.02em;color:var(--ora-deep-ocean);text-align:left;max-width:640px">¿Qué es ORA?</h2>
-  <p style="margin:0 0 72px;font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.5;color:var(--text-muted);text-align:left;max-width:640px">ORA es una <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-deep-ocean)">metodología híbrida</em> de capacitación de inglés para equipos técnicos. Combinamos clases en vivo orientadas a la fluidez y el team building con un motor de IA que hiper-personaliza las tareas y el feedback según el rol de cada colaborador.</p>
-  </div>
 
-  <div class="pillars-grid" style="width:100%;max-width:1160px;margin:0 auto;position:relative;z-index:1">
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/andragogy.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/andragogy.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Andragogía</h3>
+  <div style="position:relative;width:100%;max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:64px;z-index:1">
+
+    <div class="ora-hero-row">
+      <div class="que-es-text" style="display:flex;flex-direction:column;gap:25px;min-width:0">
+        <h2 style="margin:0;display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.02em;color:var(--ora-deep-ocean)">¿Qué es <span role="img" aria-label="ORA" style="display:inline-block;width:130px;height:46px;background-color:var(--ora-deep-ocean);mask-image:url(assets/logo/ora-mark.svg);-webkit-mask-image:url(assets/logo/ora-mark.svg);mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:center;-webkit-mask-position:center;mask-size:contain;-webkit-mask-size:contain"></span>?</h2>
+        <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.5;color:var(--text-muted);max-width:560px">ORA es una <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-deep-ocean)">metodología híbrida</em> de capacitación de inglés para equipos técnicos. Combinamos <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-deep-ocean)">clases en vivo</em> orientadas a la fluidez y el team building con un <em style="font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--ora-deep-ocean)">motor de IA</em> que hiper-personaliza las tareas y el feedback según el rol de cada colaborador.</p>
       </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Aprendizaje centrado en adultos, orientado a resultados laborales inmediatos.</p>
+
+      <div class="ora-glass-light" style="border-radius:var(--radius-lg);padding:8px;min-width:0">
+        <div style="border-radius:calc(var(--radius-lg) - 8px);overflow:hidden;aspect-ratio:16/10">
+          <iframe src="https://www.youtube.com/embed/qId7k8n0Rjc" title="Video ORA" loading="lazy" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
     </div>
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/hybrid-intelligence.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/hybrid-intelligence.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Inteligencia Híbrida</h3>
+
+    <div class="pillars-grid ora-pillars">
+      <div class="ora-glass-light ora-pillar-card" onMouseMove="{{ onMove0 }}" onMouseLeave="{{ onLeave0 }}" style="{{ cardStyle0 }}">
+        <div aria-hidden="true" class="ora-icon" style="width:30px;height:30px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/andragogy.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/andragogy.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
+        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:20px;color:var(--ora-deep-ocean)">Andragogía</h3>
+        <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.45;color:var(--text-muted)">Aprendizaje centrado en adultos, orientado a resultados laborales inmediatos.</p>
       </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Clases en vivo con un motor de IA que personaliza tareas y feedback según el rol de cada persona.</p>
-    </div>
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/team-building.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/team-building.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Team Building</h3>
+      <div class="ora-glass-light ora-pillar-card" onMouseMove="{{ onMove1 }}" onMouseLeave="{{ onLeave1 }}" style="{{ cardStyle1 }}">
+        <div aria-hidden="true" class="ora-icon" style="width:30px;height:30px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/hybrid-intelligence.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/hybrid-intelligence.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
+        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:20px;color:var(--ora-deep-ocean)">Inteligencia Híbrida</h3>
+        <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.45;color:var(--text-muted)">Clases en vivo con un motor de IA que personaliza tareas y feedback según el rol de cada persona.</p>
       </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Clases colaborativas que construyen confianza real entre los miembros del equipo.</p>
-    </div>
-    <div style="background:var(--surface-glass-light);backdrop-filter:blur(21.6px);box-shadow:var(--glass-shadow-light);border:1px solid rgba(0,62,71,0.14);border-radius:25px;padding:37px;display:flex;flex-direction:column;gap:18px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div aria-hidden="true" style="width:26px;height:26px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/reporting.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/reporting.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
-        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--ora-deep-ocean)">Reporte Constante</h3>
+      <div class="ora-glass-light ora-pillar-card" onMouseMove="{{ onMove2 }}" onMouseLeave="{{ onLeave2 }}" style="{{ cardStyle2 }}">
+        <div aria-hidden="true" class="ora-icon" style="width:30px;height:30px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/team-building.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/team-building.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
+        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:20px;color:var(--ora-deep-ocean)">Team Building</h3>
+        <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.45;color:var(--text-muted)">Clases colaborativas que construyen confianza real entre los miembros del equipo.</p>
       </div>
-      <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.5;color:var(--text-muted)">Métricas en tiempo real y progreso lingüístico, pensadas para líderes de equipo.</p>
+      <div class="ora-glass-light ora-pillar-card" onMouseMove="{{ onMove3 }}" onMouseLeave="{{ onLeave3 }}" style="{{ cardStyle3 }}">
+        <div aria-hidden="true" class="ora-icon" style="width:30px;height:30px;flex-shrink:0;background-color:var(--ora-mint-green);-webkit-mask-image:url(assets/icons/reporting.svg);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url(assets/icons/reporting.svg);mask-size:contain;mask-repeat:no-repeat;mask-position:center"></div>
+        <h3 style="margin:0;font-family:var(--font-display);font-weight:600;font-size:20px;color:var(--ora-deep-ocean)">Reporte Constante</h3>
+        <p style="margin:0;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.45;color:var(--text-muted)">Métricas en tiempo real y progreso lingüístico, pensadas para líderes de equipo.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -421,6 +439,32 @@ class Component extends DCLogic {
   heroRef = React.createRef();
   trackRef2 = React.createRef();
   stageRef2 = React.createRef();
+  state = { tilts: [0, 0, 0, 0] };
+
+  handleMove = (i) => (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    const tilts = this.state.tilts.slice();
+    tilts[i] = { rx: (py * -10).toFixed(2), ry: (px * 10).toFixed(2) };
+    this.setState({ tilts });
+  };
+
+  handleLeave = (i) => () => {
+    const tilts = this.state.tilts.slice();
+    tilts[i] = 0;
+    this.setState({ tilts });
+  };
+
+  cardStyle(i, delay) {
+    const t = this.state.tilts[i];
+    return {
+      borderRadius: 'var(--radius-md)', padding: 'var(--space-3)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', minWidth: 0,
+      animationDelay: delay,
+      transform: t ? `perspective(800px) rotateX(${t.rx}deg) rotateY(${t.ry}deg) translateY(-6px)` : undefined,
+      transition: t ? 'transform 0.15s ease-out' : 'transform 0.3s ease'
+    };
+  }
 
   componentDidMount() {
     this.running = true;
@@ -479,7 +523,15 @@ class Component extends DCLogic {
       trackRef2: this.trackRef2,
       stageRef2: this.stageRef2,
       showGlassBg: this.props.showGlassBg ?? true,
-      floatDuration: this.props.floatDuration ?? 14
+      floatDuration: this.props.floatDuration ?? 14,
+      onMove0: this.handleMove(0), onLeave0: this.handleLeave(0),
+      onMove1: this.handleMove(1), onLeave1: this.handleLeave(1),
+      onMove2: this.handleMove(2), onLeave2: this.handleLeave(2),
+      onMove3: this.handleMove(3), onLeave3: this.handleLeave(3),
+      cardStyle0: this.cardStyle(0, '0.2s'),
+      cardStyle1: this.cardStyle(1, '0s'),
+      cardStyle2: this.cardStyle(2, '0s'),
+      cardStyle3: this.cardStyle(3, '0.2s')
     };
   }
 }
