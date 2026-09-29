@@ -305,7 +305,7 @@
 
       <div class="ora-glass-light" style="border-radius:var(--radius-lg);padding:8px;min-width:0">
         <div style="border-radius:calc(var(--radius-lg) - 8px);overflow:hidden;aspect-ratio:16/10">
-          <iframe src="https://www.youtube.com/embed/qId7k8n0Rjc" title="Video ORA" loading="lazy" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="que-es-ora-video" src="https://www.youtube.com/embed/qId7k8n0Rjc?enablejsapi=1" title="Video ORA" loading="lazy" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -466,7 +466,37 @@ class Component extends DCLogic {
     };
   }
 
+  setupYouTubeQuality() {
+    const forceHD = (player) => {
+      if (player.getPlaybackQuality() !== 'hd1080') player.setPlaybackQuality('hd1080');
+    };
+    const initPlayer = () => {
+      if (!document.getElementById('que-es-ora-video')) return;
+      new window.YT.Player('que-es-ora-video', {
+        events: {
+          onReady: (e) => forceHD(e.target),
+          onPlaybackQualityChange: (e) => forceHD(e.target)
+        }
+      });
+    };
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+      return;
+    }
+    const previousCallback = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof previousCallback === 'function') previousCallback();
+      initPlayer();
+    };
+    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    }
+  }
+
   componentDidMount() {
+    this.setupYouTubeQuality();
     this.running = true;
     const tick = () => {
       if (!this.running) return;
