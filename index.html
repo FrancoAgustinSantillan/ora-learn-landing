@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" as="image" href="uploads/ora-glass-818.webp" imagesrcset="uploads/ora-glass-400.webp 400w, uploads/ora-glass-660.webp 660w, uploads/ora-glass-818.webp 818w" imagesizes="(max-width: 768px) min(80vw, 350px), 70vh" fetchpriority="high">
 <script src="./support.js"></script>
 <style>
   @font-face {
@@ -63,15 +64,29 @@
   </div>
 </div>
 <script>
+/* Loader: se oculta apenas el hero está dibujado (imagen principal lista),
+   sin esperar a YouTube, reCAPTCHA ni el formulario. Tope máximo: 3 s. */
 (function(){
+  var el = document.getElementById('ora-loader');
+  if (!el) return;
+  var done = false;
   function hide(){
-    var el = document.getElementById('ora-loader');
-    if (!el) return;
-    el.style.animation = 'ora-loader-fade 380ms ease forwards';
-    setTimeout(function(){ el.remove(); }, 380);
+    if (done) return;
+    done = true;
+    clearInterval(poll);
+    el.style.animation = 'ora-loader-fade 250ms ease forwards';
+    setTimeout(function(){ el.remove(); }, 250);
   }
-  if (document.readyState === 'complete') hide();
-  else window.addEventListener('load', hide);
+  var poll = setInterval(function(){
+    var img = document.querySelector('#dc-root .hero-glass img');
+    if (!img) return;
+    if (img.complete) { hide(); return; }
+    img.addEventListener('load', hide);
+    img.addEventListener('error', hide);
+    clearInterval(poll);
+  }, 50);
+  setTimeout(hide, 3000);
+  window.addEventListener('load', hide);
 })();
 </script>
 <x-dc>
@@ -158,6 +173,54 @@
        100vh. Lo dejamos crecer con el contenido real. */
     #dc-root, #dc-root > .sc-host { height: auto !important; min-height: 100%; }
 
+    /* ── EL ADULTO COMO CENTRO (misma sección que /quienes-somos) ── */
+    .adulto-sec{position:relative;z-index:1;background:#F3FAEC;border-radius:36px 36px 0 0;box-shadow:0 -28px 60px rgba(0,62,71,0.16);overflow:hidden;padding:120px 48px 20px}
+    .adulto-grain{position:absolute;inset:0;pointer-events:none;opacity:.035;background-size:180px 180px;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='180'%20height='180'%20filter='url(%23n)'/%3E%3C/svg%3E")}
+    .adulto-inner{position:relative;z-index:1;width:100%;max-width:1160px;margin:0 auto;color:var(--ora-deep-ocean)}
+    .adulto-title{display:flex;align-items:center;gap:28px;margin:0 0 76px}
+    .adulto-title span:not(.line){font-family:var(--font-display);font-weight:300;letter-spacing:-0.02em;font-size:clamp(28px,4.4vw,56px)}
+    .adulto-title .line{flex:1;height:1px;background:rgba(0,62,71,0.25)}
+    .adulto-sub{display:flex;align-items:center;gap:12px;margin:-56px 0 40px;font-family:var(--font-display);font-weight:400;font-size:clamp(17px,1.8vw,22px);letter-spacing:-0.01em}
+    .adulto-panels{display:flex;gap:16px;height:38vh;min-height:320px;margin-top:40px;padding-bottom:120px;box-sizing:content-box}
+    .adulto-panel{position:relative;flex:.4;border-radius:40px;overflow:hidden;cursor:pointer;background:var(--ora-deep-ocean);background-size:cover;background-position:center;transition:flex 700ms cubic-bezier(.4,0,.2,1);outline-offset:3px}
+    .adulto-panel.is-open{flex:4}
+    @media (hover:hover) and (min-width:901px){
+      .adulto-panel:hover,.adulto-panel:focus-visible{flex:4}
+      .adulto-panels:hover .adulto-panel.is-open:not(:hover),.adulto-panels:focus-within .adulto-panel.is-open:not(:focus-visible){flex:.4}
+      .adulto-panels:hover .adulto-panel.is-open:hover{flex:4}
+      .adulto-panel:hover .adulto-panel-copy,.adulto-panel:focus-visible .adulto-panel-copy{opacity:1;transform:none}
+      .adulto-panels:hover .adulto-panel.is-open:not(:hover) .adulto-panel-copy{opacity:0;transform:translateY(8px)}
+    }
+    .adulto-panel[data-pilar="andragogia"]{background-image:linear-gradient(135deg,#003E47,#349375)}
+    .adulto-panel[data-pilar="hibrida"]{background-image:linear-gradient(135deg,#003E47,#2a6f7a)}
+    .adulto-panel[data-pilar="team"]{background-image:linear-gradient(135deg,#349375,#003E47)}
+    .adulto-panel[data-pilar="reporting"]{background-image:linear-gradient(135deg,#2a6f7a,#349375)}
+    /* Las fotos se cargan recién cuando la sección se acerca a la pantalla (clase .bg-on) */
+    .adulto-panels.bg-on .adulto-panel[data-pilar="andragogia"]{background-image:url(assets/nosotros/pilar-andragogia.webp)}
+    .adulto-panels.bg-on .adulto-panel[data-pilar="hibrida"]{background-image:url(assets/nosotros/pilar-hibrida.webp)}
+    .adulto-panels.bg-on .adulto-panel[data-pilar="team"]{background-image:url(assets/nosotros/pilar-team.webp)}
+    .adulto-panels.bg-on .adulto-panel[data-pilar="reporting"]{background-image:url(assets/nosotros/pilar-reporting.webp)}
+    .adulto-panel-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,33,38,0.78) 0%,rgba(0,33,38,0.15) 55%,rgba(0,33,38,0.35) 100%);pointer-events:none}
+    .adulto-panel-copy{position:absolute;left:24px;right:24px;bottom:22px;opacity:0;transform:translateY(8px);transition:opacity 350ms ease 120ms,transform 450ms cubic-bezier(.16,1,.3,1) 120ms}
+    .adulto-panel.is-open .adulto-panel-copy{opacity:1;transform:none}
+    .adulto-panel-copy h3{font-family:var(--font-display);font-weight:400;font-size:19px;letter-spacing:-0.01em;margin:0 0 6px;color:#fff;white-space:nowrap}
+    .adulto-panel-copy p{font-family:var(--font-body);font-size:13.5px;line-height:1.5;color:rgba(255,255,255,0.85);margin:0;max-width:30em}
+    @media (max-width:900px){
+      .adulto-sec{padding:80px 24px 72px;border-radius:28px 28px 0 0}
+      .adulto-title{margin-bottom:40px;gap:16px}
+      .adulto-sub{margin:-24px 0 28px}
+      /* Mobile: acordeón vertical. Alto total fijo para que la página no salte. */
+      .adulto-panels{flex-direction:column;gap:10px;height:min(560px,78svh);min-height:440px;padding-bottom:0}
+      .adulto-panel{flex:1;min-height:0;border-radius:24px;transition:flex 600ms cubic-bezier(.4,0,.2,1)}
+      .adulto-panel.is-open{flex:5}
+      .adulto-panel-overlay{background:linear-gradient(0deg,rgba(0,33,38,0.82) 0%,rgba(0,33,38,0.35) 60%,rgba(0,33,38,0.45) 100%)}
+      .adulto-panel-copy{opacity:1;transform:none;left:20px;right:20px;bottom:16px}
+      .adulto-panel-copy h3{white-space:normal;margin:0;font-size:18px;transition:font-size 400ms ease}
+      .adulto-panel-copy p{max-height:0;opacity:0;overflow:hidden;transition:max-height 500ms cubic-bezier(.16,1,.3,1),opacity 350ms ease,margin 400ms ease}
+      .adulto-panel.is-open .adulto-panel-copy h3{font-size:21px}
+      .adulto-panel.is-open .adulto-panel-copy p{max-height:7em;opacity:1;margin-top:6px;transition-delay:150ms}
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       .ora-nav{padding:14px 20px !important}
@@ -192,8 +255,6 @@
       .banner-sec > div{flex-direction:column !important;align-items:flex-start !important;gap:24px !important}
       .banner-h2{font-size:24px !important}
 
-      .no-encontraras-sec{padding:0 24px 72px !important}
-      .no-encontraras-sec h2{font-size:30px !important}
 
       .blog-sec{padding:64px 24px 72px !important}
       .blog-sec h2{font-size:32px !important}
@@ -243,7 +304,7 @@
     </svg>
 
     <div aria-hidden="true" class="hero-glass" style="position:absolute;height:58vh;width:calc(58vh * 0.578);opacity:calc(1 - (var(--p) * 0.55));pointer-events:none;z-index:1;animation-name:float-whole;animation-duration:{{ floatDuration }}s;animation-timing-function:ease-in-out;animation-iteration-count:infinite">
-      <img alt="" src="uploads/image 632.png" fetchpriority="high" width="818" height="1415" style="position:absolute;inset:0;height:100%;width:100%;-webkit-mask-image:radial-gradient(ellipse 90% 85% at 45% 45%, black 0%, black 60%, transparent 100%);mask-image:radial-gradient(ellipse 90% 85% at 45% 45%, black 0%, black 60%, transparent 100%)">
+      <img alt="" src="uploads/ora-glass-818.webp" srcset="uploads/ora-glass-400.webp 400w, uploads/ora-glass-660.webp 660w, uploads/ora-glass-818.webp 818w" sizes="(max-width: 768px) min(80vw, 350px), 70vh" fetchpriority="high" width="818" height="1415" style="position:absolute;inset:0;height:100%;width:100%;-webkit-mask-image:radial-gradient(ellipse 90% 85% at 45% 45%, black 0%, black 60%, transparent 100%);mask-image:radial-gradient(ellipse 90% 85% at 45% 45%, black 0%, black 60%, transparent 100%)">
     </div>
 
     <div style="position:relative;z-index:6;display:flex;flex-direction:column;align-items:center;gap:22px;transform:scale(calc(1 - var(--p) * 0.12))">
@@ -295,7 +356,7 @@
 <section class="reveal-sec que-es-sec" id="que-es-ora" aria-label="Qué es ORA" style="position:relative;background:var(--ora-paper);padding:120px 48px 140px;display:flex;flex-direction:column;align-items:center;overflow:hidden;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
   <div aria-hidden="true" style="position:absolute;top:-220px;right:-160px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(52,147,117,0.30) 0%,rgba(52,147,117,0) 70%);pointer-events:none;animation:ora-drift 14s ease-in-out infinite;z-index:0"></div>
 <sc-if value="{{ showGlassBg }}" hint-placeholder-val="{{ true }}">
-  <img alt="" src="uploads/image 632 - copia.png" aria-hidden="true" class="que-es-glass" style="position:absolute;top:2%;right:-7%;height:96%;width:auto;opacity:0.92;z-index:0;pointer-events:none">
+  <img alt="" src="uploads/ora-glass-818.webp" loading="lazy" decoding="async" aria-hidden="true" class="que-es-glass" style="position:absolute;top:2%;right:-7%;height:96%;width:auto;opacity:0.92;z-index:0;pointer-events:none">
   </sc-if>
 
   <div style="position:relative;width:100%;max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:64px;z-index:1">
@@ -358,32 +419,32 @@
   </div>
 </section>
 
-<section class="no-encontraras-sec" aria-label="Lo que no vas a encontrar en ORA" style="position:relative;background:var(--ora-deep-ocean);padding:0 48px 140px;display:flex;flex-direction:column;align-items:center">
-  <div style="width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start">
-  <h2 style="margin:0 0 64px;font-family:var(--font-display);font-weight:600;font-size:40px;letter-spacing:-0.02em;color:var(--ora-lime-green);text-align:left;max-width:700px">Lo que no vas a encontrar en ORA.</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:48px 40px;width:100%;max-width:1080px">
-    <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex-shrink:0;margin-top:4px"><path d="M1 1 L17 17 M17 1 L1 17" stroke="var(--ora-mint-green)" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;line-height:1.3;color:var(--ora-lime-green)">Nunca garantizaremos "aprender sin esfuerzo".</p>
-      </div>
-      <p style="margin:0 0 0 32px;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.55;color:rgba(226,255,213,0.65)">Adquirir una habilidad compleja exige rigor. Prometer lo contrario es un insulto a la inteligencia del profesional.</p>
+<!-- ▼▼▼ SECCIÓN: EL ADULTO COMO CENTRO (traída de /quienes-somos) ▼▼▼ -->
+<section class="adulto-sec" aria-labelledby="adulto-h">
+  <div class="adulto-grain" aria-hidden="true"></div>
+  <div class="adulto-inner">
+    <h2 id="adulto-h" class="adulto-title reveal-sec" style="opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)"><span>El adulto</span><span class="line" aria-hidden="true"></span><span>como centro</span></h2>
+    <p class="adulto-sub reveal-sec" style="opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1) 120ms, transform 700ms cubic-bezier(.22,.61,.36,1) 120ms">La solución que trae
+      <svg width="48" height="18.5" viewBox="0 0 3081 1187" fill="none" style="display:block;flex-shrink:0" aria-hidden="true"><path d="M 1713.21 0 C 1713.485 0 1713.709 0.223 1713.709 0.495 C 1713.709 0.757 1713.928 0.972 1714.19 0.987 C 2152.968 26.228 2190.444 530.522 1902.259 704.197 C 1872.751 721.979 1861.536 761.925 1882.975 788.804 L 2021.425 962.377 C 2029.157 972.07 2044.401 970.496 2049.966 959.431 L 2486.86 90.743 C 2505.664 53.356 2559.328 53.356 2578.132 90.743 L 3075.547 1079.771 C 3092.51 1113.499 3067.842 1153.182 3029.911 1153.182 L 1207.57 1153.182 C 1179.391 1153.182 1156.546 1130.471 1156.546 1102.456 L 1156.546 894.53 C 1156.546 875.687 1126.072 869.272 1116.727 885.666 C 1014.18 1065.587 819.846 1187 596.982 1187 C 267.278 1187 0 921.281 0 593.5 C 0 265.719 267.278 0 596.982 0 C 819.845 0 1014.179 121.414 1116.727 301.334 C 1126.072 317.726 1156.545 311.312 1156.546 292.47 L 1156.546 50.726 C 1156.547 22.711 1179.391 0 1207.57 0 L 1713.21 0 Z" fill="#003E47" fill-rule="nonzero"></path></svg>
+    </p>
+    <div class="adulto-panels reveal-sec" style="opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1) 240ms, transform 700ms cubic-bezier(.22,.61,.36,1) 240ms">
+      <article class="adulto-panel is-open" data-pilar="andragogia" tabindex="0">
+        <div class="adulto-panel-overlay"></div>
+        <div class="adulto-panel-copy"><h3>Andragogía</h3><p>Aprendizaje centrado en cómo aprenden los adultos, teniendo en cuenta sus objetivos y contexto.</p></div>
+      </article>
+      <article class="adulto-panel" data-pilar="hibrida" tabindex="0">
+        <div class="adulto-panel-overlay"></div>
+        <div class="adulto-panel-copy"><h3>Inteligencia híbrida</h3><p>Clases con profes con un motor de IA que personaliza las tareas y el feedback según el rol.</p></div>
+      </article>
+      <article class="adulto-panel" data-pilar="team" tabindex="0">
+        <div class="adulto-panel-overlay"></div>
+        <div class="adulto-panel-copy"><h3>Team building</h3><p>Clases colaborativas que construyen confianza real entre los miembros del equipo.</p></div>
+      </article>
+      <article class="adulto-panel" data-pilar="reporting" tabindex="0">
+        <div class="adulto-panel-overlay"></div>
+        <div class="adulto-panel-copy"><h3>Reporte constante</h3><p>Métricas en tiempo real y progreso lingüístico, pensadas para líderes de equipo.</p></div>
+      </article>
     </div>
-    <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1) 120ms, transform 700ms cubic-bezier(.22,.61,.36,1) 120ms">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex-shrink:0;margin-top:4px"><path d="M1 1 L17 17 M17 1 L1 17" stroke="var(--ora-mint-green)" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;line-height:1.3;color:var(--ora-lime-green)">Nunca usaremos el término "clases divertidas".</p>
-      </div>
-      <p style="margin:0 0 0 32px;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.55;color:rgba(226,255,213,0.65)">Buscamos clases significativas. La satisfacción proviene del progreso real y la utilidad, no del entretenimiento superficial.</p>
-    </div>
-    <div class="reveal-sec" style="display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(32px);transition:opacity 700ms cubic-bezier(.22,.61,.36,1) 240ms, transform 700ms cubic-bezier(.22,.61,.36,1) 240ms">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="flex-shrink:0;margin-top:4px"><path d="M1 1 L17 17 M17 1 L1 17" stroke="var(--ora-mint-green)" stroke-width="2" stroke-linecap="round"></path></svg>
-        <p style="margin:0;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:-0.01em;line-height:1.3;color:var(--ora-lime-green)">Nunca "desaprobaremos" a nadie.</p>
-      </div>
-      <p style="margin:0 0 0 32px;font-family:var(--font-body);font-weight:300;font-size:15px;line-height:1.55;color:rgba(226,255,213,0.65)">No somos jueces escolares. Evaluamos niveles de desempeño (B1, B2, C1) bajo estándares internacionales (Cambridge/CEFR) para medir competencia, no conducta.</p>
-    </div>
-  </div>
   </div>
 </section>
 
@@ -895,6 +956,57 @@ class Component extends DCLogic {
       }).catch(function () {});
     } catch (e) {}
   });
+})();
+</script>
+<script>
+/* "El adulto como centro": abrir paneles con tap/clic/teclado y cargar las fotos al acercarse */
+(function(){
+  function open(p){
+    document.querySelectorAll('.adulto-panel').forEach(function(o){ o.classList.toggle('is-open', o === p); });
+  }
+  document.addEventListener('click', function(e){
+    var p = e.target.closest && e.target.closest('.adulto-panel');
+    if (p) open(p);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var p = e.target.closest && e.target.closest('.adulto-panel');
+    if (p) { e.preventDefault(); open(p); }
+  });
+  /* Mobile: al hacer scroll se abre el panel que corresponde a la posición en pantalla */
+  var mq = window.matchMedia('(max-width:900px)');
+  var ticking = false, lastIdx = -1;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      if (!mq.matches) return;
+      var box = document.querySelector('#dc-root .adulto-panels');
+      if (!box) return;
+      var r = box.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      var prog = (vh * 0.62 - r.top) / r.height;
+      var idx = Math.max(0, Math.min(3, Math.floor(prog * 4)));
+      if (idx === lastIdx) return;
+      lastIdx = idx;
+      var ps = box.querySelectorAll('.adulto-panel');
+      if (ps[idx]) open(ps[idx]);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  var tries = 0, t = setInterval(function(){
+    var box = document.querySelector('#dc-root .adulto-panels');
+    if (!box && ++tries < 200) return;
+    clearInterval(t);
+    if (!box) return;
+    if (!('IntersectionObserver' in window)) { box.classList.add('bg-on'); return; }
+    var io = new IntersectionObserver(function(en){
+      if (en[0].isIntersecting) { box.classList.add('bg-on'); io.disconnect(); }
+    }, { rootMargin: '600px 0px' });
+    io.observe(box);
+  }, 100);
 })();
 </script>
 </body>
