@@ -4,8 +4,30 @@
   var pill = nav && nav.querySelector('.ora-nav-pill');
   if (!pill) return;
 
-  var links = pill.querySelectorAll('.ora-nav-links a, .ora-nav-actions a.nav-link');
-  if (!links.length) return;
+  var items = pill.querySelectorAll('.ora-nav-links > a, .ora-nav-links > .nav-dd, .ora-nav-actions a.nav-link');
+  if (!items.length) return;
+
+  // ── Dropdown "Industrias" (desktop) ──
+  var dd = pill.querySelector('.nav-dd');
+  if (dd) {
+    var ddBtn = dd.querySelector('.nav-dd-btn');
+    var setDd = function (open) {
+      dd.classList.toggle('is-open', open);
+      ddBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    if (dd.querySelector('[aria-current="page"]')) ddBtn.classList.add('is-current');
+    ddBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setDd(!dd.classList.contains('is-open'));
+    });
+    dd.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dd.classList.contains('is-open')) { setDd(false); ddBtn.focus(); }
+    });
+    dd.addEventListener('focusout', function (e) {
+      if (!dd.contains(e.relatedTarget)) setDd(false);
+    });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target)) setDd(false); });
+  }
 
   var btn = document.createElement('button');
   btn.type = 'button';
@@ -19,12 +41,24 @@
   menu.id = 'nav-menu';
   menu.className = 'nav-menu';
   menu.setAttribute('aria-label', 'Menú');
-  links.forEach(function (a) {
+  function addLink(a, sub) {
     var c = document.createElement('a');
     c.href = a.getAttribute('href');
     c.textContent = a.textContent;
+    if (sub) c.className = 'nav-menu-sub';
     if (a.getAttribute('aria-current')) c.setAttribute('aria-current', a.getAttribute('aria-current'));
     menu.appendChild(c);
+  }
+  Array.prototype.forEach.call(items, function (el) {
+    if (el.classList.contains('nav-dd')) {
+      var label = document.createElement('span');
+      label.className = 'nav-menu-label';
+      label.textContent = el.querySelector('.nav-dd-btn').textContent.trim();
+      menu.appendChild(label);
+      Array.prototype.forEach.call(el.querySelectorAll('.nav-dd-menu a'), function (a) { addLink(a, true); });
+    } else {
+      addLink(el, false);
+    }
   });
 
   var logo = pill.firstElementChild;
