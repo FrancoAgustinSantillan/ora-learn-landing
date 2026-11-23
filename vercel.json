@@ -7,6 +7,7 @@
   "rewrites": [
     { "source": "/staffing", "destination": "/staffing.html" },
     { "source": "/english-for-tech", "destination": "/english-for-tech.html" },
+    { "source": "/ingles-para-futbolistas", "destination": "/ingles-para-futbolistas.html" },
     { "source": "/quienes-somos", "destination": "/quienes-somos.html" },
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/blog/:slug", "destination": "/blog/:slug.html" },
