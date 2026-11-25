@@ -1,8 +1,12 @@
 // Menú hamburguesa del navbar (mobile). Arma el menú a partir de los links que ya tiene el navbar.
 (function () {
+  // La home se dibuja con un runtime (x-dc) DESPUÉS de que carga este script, así que el
+  // navbar puede no existir todavía (o ser reemplazado al re-renderizar). Por eso se
+  // inicializa cuando aparece y se vuelve a inicializar si el menú desapareció.
+  function init() {
   var nav = document.querySelector('.ora-nav');
   var pill = nav && nav.querySelector('.ora-nav-pill');
-  if (!pill) return;
+  if (!pill || pill.querySelector('.nav-toggle')) return;
 
   var items = pill.querySelectorAll('.ora-nav-links > a, .ora-nav-links > .nav-dd, .ora-nav-actions a.nav-link');
   if (!items.length) return;
@@ -81,4 +85,14 @@
     if (e.key === 'Escape' && menu.classList.contains('is-open')) { setOpen(false); btn.focus(); }
   });
   window.matchMedia('(min-width:769px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+  }
+
+  init();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  var scheduled = false;
+  new MutationObserver(function () {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(function () { scheduled = false; init(); });
+  }).observe(document.documentElement, { childList: true, subtree: true });
 })();
