@@ -1,0 +1,28 @@
+/* Botón de idioma: mini "pill" de vidrio (mismo diseño que el navbar), fijo debajo del navbar, a la derecha.
+   Lo inyecta lang-switch.js a partir de los <link rel="alternate" hreflang> de la página. */
+.lang-switch{
+  position:fixed;
+  top:var(--lang-switch-top,96px);
+  right:32px;
+  z-index:49; /* justo debajo del navbar (50) */
+  box-sizing:border-box;
+  display:inline-flex;align-items:center;gap:8px;
+  height:38px;padding:0 16px 0 13px;
+  font-family:var(--font-body);font-size:13.5px;font-weight:600;letter-spacing:0.04em;line-height:1;
+  color:var(--ora-deep-ocean);text-decoration:none;white-space:nowrap;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.2);border-radius:999px;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,0.6),inset 0 -1px 1px rgba(0,62,71,0.05),0 8px 20px rgba(0,62,71,0.1);
+  transition:background 180ms ease,box-shadow 180ms ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.lang-switch:hover{background:rgba(52,147,117,0.14);color:var(--ora-deep-ocean)}
+.lang-switch:focus-visible{outline:2px solid var(--ora-mint-green);outline-offset:2px}
+.lang-switch svg{width:16px;height:16px;flex-shrink:0}
+
+@media (max-width:768px){
+  .lang-switch{right:20px;height:34px;padding:0 13px 0 11px;font-size:13px;gap:6px}
+  .lang-switch svg{width:15px;height:15px}
+}
+@media print{.lang-switch{display:none}}

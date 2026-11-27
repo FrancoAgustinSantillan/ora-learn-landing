@@ -1,5 +1,7 @@
 // Menú hamburguesa del navbar (mobile). Arma el menú a partir de los links que ya tiene el navbar.
 (function () {
+  var EN = (document.documentElement.lang || 'es').toLowerCase().indexOf('en') === 0;
+  var T = EN ? { open: 'Open menu', close: 'Close menu', menu: 'Menu' } : { open: 'Abrir menú', close: 'Cerrar menú', menu: 'Menú' };
   // La home se dibuja con un runtime (x-dc) DESPUÉS de que carga este script, así que el
   // navbar puede no existir todavía (o ser reemplazado al re-renderizar). Por eso se
   // inicializa cuando aparece y se vuelve a inicializar si el menú desapareció.
@@ -36,7 +38,7 @@
   var btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'nav-toggle';
-  btn.setAttribute('aria-label', 'Abrir menú');
+  btn.setAttribute('aria-label', T.open);
   btn.setAttribute('aria-expanded', 'false');
   btn.setAttribute('aria-controls', 'nav-menu');
   btn.innerHTML = '<span></span><span></span><span></span>';
@@ -44,7 +46,7 @@
   var menu = document.createElement('nav');
   menu.id = 'nav-menu';
   menu.className = 'nav-menu';
-  menu.setAttribute('aria-label', 'Menú');
+  menu.setAttribute('aria-label', T.menu);
   function addLink(a, sub) {
     var c = document.createElement('a');
     c.href = a.getAttribute('href');
@@ -72,7 +74,7 @@
   function setOpen(open) {
     menu.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    btn.setAttribute('aria-label', open ? T.close : T.open);
   }
 
   btn.addEventListener('click', function (e) {
