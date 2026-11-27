@@ -5,6 +5,7 @@
   "installCommand": "",
   "outputDirectory": ".",
   "rewrites": [
+    { "source": "/en", "destination": "/en/index.html" },
     { "source": "/staffing", "destination": "/staffing.html" },
     { "source": "/english-for-tech", "destination": "/english-for-tech.html" },
     { "source": "/ingles-para-futbolistas", "destination": "/ingles-para-futbolistas.html" },
